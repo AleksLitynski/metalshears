@@ -3,8 +3,9 @@ extends Node
 
 
 
-static func Hoist(root: Node):
-	var to_hoist = _get_all_collision_shape_children(root)
+static func Hoist(root: Node, root_child: Node = null):
+	if root_child == null: root_child = root
+	var to_hoist = _get_all_collision_shape_children(root_child)
 	for child in to_hoist:
 		child.reparent(root)
 		

@@ -76,7 +76,9 @@ func _process(delta):
 	
 
 func update_camera(delta):
-	apply_camera_move(delta)
+	if !character.is_frozen():
+		apply_camera_move(delta)
+		
 	if camera && character:
 		var cms = camera_move_speed * delta if !snap_camera && !force_snap else INF
 		var crs = camera_rotate_speed * delta if !snap_camera && !force_snap else INF
@@ -121,7 +123,7 @@ func _input(event: InputEvent):
 var delta_mouse: Vector2 = Vector2.ZERO
 func apply_camera_move(delta: float):
 	
-	var current_input_vec = Vector2(Input.get_axis("camera_right", "camera_left"), Input.get_axis("camera_up", "camera_down"))
+	var current_input_vec = Vector2(Input.get_axis("camera_right", "camera_left"), Input.get_axis("camera_up", "camera_down"))		
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		snap_camera = delta_mouse != Vector2.ZERO
 		current_input_vec += delta_mouse * Vector2(-0.175, 0.1)
@@ -150,7 +152,7 @@ func handle_move_event(event: InputEvent):
 	if event.is_action_pressed("move_right"): move_vec.x += 1
 	if event.is_action_released("move_right"): move_vec.x -= 1
 	
-	if character.current_state == Character.CHARACTER_STATES.FROZEN:
+	if character.is_frozen():
 		character.set_dir(Vector2(0, -1).rotated(-camera.global_rotation.y))
 	else:
 		character.set_dir(move_vec.normalized().rotated(-camera.global_rotation.y))
@@ -165,8 +167,9 @@ func handle_move_event(event: InputEvent):
 		character.crouch()
 
 func handle_action_event(event: InputEvent):
-	if event.is_action("right_hand_primary"):
-		print("right_hand_primary")
+	if event.is_action_pressed("right_hand_primary"):
+		if character.is_frozen():
+			character.do_slice()
 	if event.is_action_pressed("right_hand_secondary"):
 		enter_cut_mode()
 	if event.is_action_released("right_hand_secondary"):
@@ -181,15 +184,14 @@ func handle_action_event(event: InputEvent):
 		print("use_item")
 
 func enter_cut_mode():
-	print("enter cut mode")
 	character.freeze_movement()
+	character.set_dir(Vector2(0, -1).rotated(-camera.global_rotation.y))
 	# zoom in the camera
 	camera_offset = zoomed_camera_offset
 	camera_target_height = zoomed_camera_target_height
-	character.tween_trans_to(0.1)
+	character.tween_trans_to(0.3)
 	
 func exit_cut_mode():
-	print("exit cut mode")
 	character.unfreeze_movement()
 	if move_vec == Vector2.ZERO:
 		character.set_dir(Vector2.ZERO)

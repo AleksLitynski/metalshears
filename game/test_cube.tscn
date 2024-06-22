@@ -9,16 +9,14 @@ albedo_color = Color(0.403922, 0.247059, 1, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_0q533"]
 material = SubResource("StandardMaterial3D_hnt6x")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ip05w"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_d7g1s"]
 
-[node name="TestCube" type="Node3D"]
-
-[node name="RigidBody3D" type="RigidBody3D" parent="." groups=["pushable"]]
+[node name="TestCube" type="RigidBody3D" groups=["pushable", "sliceable"]]
 physics_material_override = SubResource("PhysicsMaterial_gnquh")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+[node name="mesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_0q533")
 skeleton = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-shape = SubResource("BoxShape3D_ip05w")
+[node name="shape" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_d7g1s")

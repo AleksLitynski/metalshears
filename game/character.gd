@@ -31,7 +31,7 @@ enum CHARACTER_STATES {
 var current_state: CHARACTER_STATES = CHARACTER_STATES.WALK
 
 func _ready():
-	HoistPhysicsShapes.Hoist(self)
+	HoistPhysicsShapes.Hoist(self, $character_1)
 
 var queued_dir: Vector2 = Vector2.ZERO
 func set_dir(dir: Vector2):
@@ -238,3 +238,13 @@ func set_transparency(trans: float = 1.0):
 				current_surf.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_ALWAYS
 				current_surf.albedo_color.a = trans
 				child.mesh.surface_set_material(surf_idx, current_surf)
+
+func is_frozen():
+	return current_state == CHARACTER_STATES.FROZEN
+
+func do_slice():
+	var blade: Blade = $blade_area
+	for body in blade.get_overlapping_bodies():
+		if body.is_in_group("sliceable"):
+			blade.slice_mesh(body)
+			

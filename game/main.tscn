@@ -16,14 +16,16 @@ shadow_enabled = true
 [node name="player" parent="." instance=ExtResource("2_36kpo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.589192, 0)
 
-[node name="TestCube" parent="." instance=ExtResource("3_jkn8q")]
+[node name="sliceable_cubes" type="Node3D" parent="."]
+
+[node name="TestCube" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2672, 1.94815, -4.01567)
 
-[node name="TestCube2" parent="." instance=ExtResource("3_jkn8q")]
+[node name="TestCube2" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2672, 1.94815, -4.01567)
 
-[node name="TestCube3" parent="." instance=ExtResource("3_jkn8q")]
+[node name="TestCube3" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4597, 3.21965, -4.01567)
 
-[node name="TestCube4" parent="." instance=ExtResource("3_jkn8q")]
+[node name="TestCube4" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.82422, 1.94815, -4.01567)
