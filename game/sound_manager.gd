@@ -1,6 +1,9 @@
 class_name SoundManager
 
 extends Node
+# TODO: add crossfades when switching bgm https://www.gdquest.com/tutorial/godot/audio/background-music-transition/
+# TODO: support different sfx based on situation and cycle through a few of them for variety.
+# TODO: use Godot's audio busses to adjust volumes overall and add effects.
 
 var title_bgm = preload("res://sounds/bgm/metal-gear-136567.mp3")
 var main_bgm = preload("res://sounds/bgm/jazz-bossa-nova-163669-loop-version.mp3")
@@ -51,6 +54,7 @@ func play_bgm(bgm):
 		print("Unknown bgm: " + bgm)
 
 # Play sound effect
+
 func play_sfx():
 	sfx_player.play(0)
 
