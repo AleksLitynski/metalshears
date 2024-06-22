@@ -2,7 +2,6 @@ class_name SoundManager
 
 extends Node
 # TODO: support different sfx based on situation and cycle through a few of them for variety.
-# TODO: use Godot's audio busses to adjust volumes overall and add effects.
 
 enum BGM { NONE, TITLE, MAIN, CUTTING }
 
@@ -17,7 +16,8 @@ var current_bgm = BGM.NONE
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	play_sound_check()
+	# Uncomment and run scene to perform sound check.
+	# play_sound_check()
 	pass
 
 
@@ -57,14 +57,14 @@ func play_sfx():
 
 func play_sound_check():
 	play_bgm(BGM.TITLE)
-	await get_tree().create_timer(3).timeout
+	await get_tree().create_timer(5).timeout
 	play_bgm(BGM.MAIN)
-	await get_tree().create_timer(3).timeout
+	await get_tree().create_timer(5).timeout
 	play_bgm(BGM.CUTTING)
-	await get_tree().create_timer(3).timeout
+	await get_tree().create_timer(5).timeout
 	play_sfx()
 	await get_tree().create_timer(1).timeout
 	play_sfx()
 	play_bgm(BGM.MAIN)
-	await get_tree().create_timer(3).timeout
+	await get_tree().create_timer(5).timeout
 	play_bgm(BGM.NONE)
