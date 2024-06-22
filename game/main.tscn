@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtuxpie420j5d"]
+
+[ext_resource type="PackedScene" uid="uid://felyvflwfi0s" path="res://arena.tscn" id="1_6qgla"]
+[ext_resource type="PackedScene" uid="uid://bwjcmdmj0qx6q" path="res://player.tscn" id="2_36kpo"]
+
+[node name="main" type="Node3D"]
+
+[node name="arena" parent="." instance=ExtResource("1_6qgla")]
+
+[node name="sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.639721, 0.571823, -0.513591, 0, 0.668209, 0.743973, 0.768607, -0.475935, 0.427467, -48.9612, 111.955, 29.6787)
+light_energy = 0.75
+
+[node name="player" parent="." instance=ExtResource("2_36kpo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.589192, 0)

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0qsf2n6rekoh"]
+
+[ext_resource type="PackedScene" uid="uid://p043a6a42mch" path="res://models/character_1.blend" id="1_a00ja"]
+[ext_resource type="Script" path="res://character.gd" id="1_p63os"]
+
+[node name="character" type="CharacterBody3D"]
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+script = ExtResource("1_p63os")
+
+[node name="character_1" parent="." instance=ExtResource("1_a00ja")]

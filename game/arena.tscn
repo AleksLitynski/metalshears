@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://felyvflwfi0s"]
+
+[ext_resource type="Script" path="res://arena.gd" id="1_bia0f"]
+[ext_resource type="PackedScene" uid="uid://ba0pk6273vd0p" path="res://models/arena_1.blend" id="1_lbsha"]
+
+[node name="arena" type="StaticBody3D"]
+script = ExtResource("1_bia0f")
+
+[node name="arena_1" parent="." instance=ExtResource("1_lbsha")]
