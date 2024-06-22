@@ -18,6 +18,7 @@ var last_move_vec: Vector2
 
 var jump_strength: float = 5
 var jumping_from_run: bool = false
+ 
 
 enum CHARACTER_STATES {
 	CROUCH,
@@ -25,6 +26,7 @@ enum CHARACTER_STATES {
 	RUN,
 	JUMP,
 	ROLL,
+	FROZEN
 }
 var current_state: CHARACTER_STATES = CHARACTER_STATES.WALK
 
@@ -53,10 +55,17 @@ func _physics_process(delta):
 	if input_vec != Vector2.ZERO && turn_to_face_input:
 		last_move_vec = input_vec
 	velocity = Vector3(scaled_input.x, velocity.y - (gravity * delta), scaled_input.y)
-	move_and_slide()
+	if move_and_slide():
+		for i in range(get_slide_collision_count()):
+			var collision = get_slide_collision(i)
+			var collider = collision.get_collider()
+			if collider.is_in_group("pushable"):
+				collider.apply_impulse(-collision.get_normal() * 0.1 * move_speed * delta, collision.get_position() - collider.global_position)
+		
 	if is_on_floor():
 		velocity.y = 0
 		_end_jump()
+	
 	
 
 	
@@ -190,3 +199,42 @@ func _end_crouch():
 	if current_state == CHARACTER_STATES.CROUCH:
 		_start_walk()
 
+# --- FREEZE MOVEMENT ---
+func freeze_movement():
+	move_speed = 0
+	current_state = CHARACTER_STATES.FROZEN
+	in_pre_roll = false
+	scale.y = 1.0
+
+func unfreeze_movement():
+	_start_walk()
+
+var current_transparency: float = 1.0
+var trans_tween: Tween
+func tween_trans_to(target: float, duration: float = 0.5):
+	if trans_tween != null:
+		trans_tween.stop()
+	trans_tween = get_tree().create_tween()
+	trans_tween.tween_method(func(i):
+		current_transparency = i
+		set_transparency(i)
+	, current_transparency, target, duration)
+	trans_tween.play()
+	
+func set_transparency(trans: float = 1.0):
+	for child in $character_1.get_children():
+		if child is MeshInstance3D:
+			for surf_idx in range(child.get_surface_override_material_count()):
+				var current_surf: StandardMaterial3D = child.get_surface_override_material(surf_idx)
+				if current_surf == null: continue
+				current_surf.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+				current_surf.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_ALWAYS
+				current_surf.albedo_color.a = trans
+				child.set_surface_override_material(surf_idx, current_surf)
+			for surf_idx in range(child.mesh.get_surface_count()):
+				var current_surf: StandardMaterial3D = child.mesh.surface_get_material(surf_idx)
+				if current_surf == null: continue
+				current_surf.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+				current_surf.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_ALWAYS
+				current_surf.albedo_color.a = trans
+				child.mesh.surface_set_material(surf_idx, current_surf)
