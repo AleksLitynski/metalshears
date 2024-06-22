@@ -5,18 +5,12 @@ extends Node
 # TODO: support different sfx based on situation and cycle through a few of them for variety.
 # TODO: use Godot's audio busses to adjust volumes overall and add effects.
 
-var title_bgm = preload("res://sounds/bgm/metal-gear-136567.mp3")
-var main_bgm = preload("res://sounds/bgm/jazz-bossa-nova-163669-loop-version.mp3")
-var cutting_bgm = preload("res://sounds/bgm/melodic-metal-186403.mp3")
-
-var sword_sfx = preload("res://sounds/sfx/sword-sound-2-36274.mp3")
-
 enum BGM { NONE, TITLE, MAIN, CUTTING }
 
-var title_bgm_player = create_bgm_stream_player(title_bgm, "TitleBgmPlayer")
-var main_bgm_player = create_bgm_stream_player(main_bgm, "MainBgmPlayer")
-var cutting_bgm_player = create_bgm_stream_player(cutting_bgm, "CuttingBgmPlayer")
-var sfx_player = create_sfx_stream_player(sword_sfx)
+@onready var title_bgm_player = $TitleBgmPlayer as AudioStreamPlayer
+@onready var main_bgm_player = $MainBgmPlayer as AudioStreamPlayer
+@onready var cutting_bgm_player = $CuttingBgmPlayer as AudioStreamPlayer
+@onready var sfx_player = $SfxPlayer as AudioStreamPlayer
 
 var current_bgm = BGM.NONE
 
@@ -59,25 +53,6 @@ func play_sfx():
 	sfx_player.play(0)
 
 # Internal functions
-
-func create_bgm_stream_player(stream, name):
-	var stream_player = create_audio_stream_player()
-	stream_player.stream = stream
-	stream.loop = true
-	stream_player.name = name
-	return stream_player
-
-func create_sfx_stream_player(stream, name = "SfxStreamPlayer"):
-	var stream_player = create_audio_stream_player()
-	stream_player.stream = stream
-	stream.loop = false
-	stream_player.name = name
-	return stream_player
-
-func create_audio_stream_player():
-	var audio_stream_player = AudioStreamPlayer.new()
-	add_child(audio_stream_player)
-	return audio_stream_player;
 
 func play_sound_check():
 	play_bgm(BGM.TITLE)

@@ -1,6 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://dvshpap15hwq"]
+[gd_scene load_steps=6 format=3 uid="uid://dvshpap15hwq"]
 
 [ext_resource type="Script" path="res://sound_manager.gd" id="1_m78h6"]
+[ext_resource type="AudioStream" uid="uid://dqk24ybaaa7vr" path="res://sounds/bgm/jazz-bossa-nova-163669-loop-version.mp3" id="1_rctpy"]
+[ext_resource type="AudioStream" uid="uid://2cppuillt6d8" path="res://sounds/bgm/metal-gear-136567.mp3" id="2_wp5x0"]
+[ext_resource type="AudioStream" uid="uid://dar78ssy23o0v" path="res://sounds/bgm/melodic-metal-186403.mp3" id="4_86jky"]
+[ext_resource type="AudioStream" uid="uid://balngqiu5b33u" path="res://sounds/sfx/sword-sound-2-36274.mp3" id="5_ln4gl"]
 
 [node name="SoundManager" type="Node"]
 script = ExtResource("1_m78h6")
+
+[node name="TitleBgmPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_wp5x0")
+
+[node name="MainBgmPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_rctpy")
+
+[node name="CuttingBgmPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_86jky")
+
+[node name="SfxPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ln4gl")
