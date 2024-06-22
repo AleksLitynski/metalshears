@@ -7,9 +7,9 @@ var camera: Camera3D
 
 # Camera Position
 var camera_angle: float = 0 # point on circle around the player
-var moving_camera_offset: Vector2 = Vector2(1, 1.25)
-var zoomed_camera_offset: Vector2 = Vector2(0.5, 1.0)
-var camera_offset: Vector2 = moving_camera_offset # X is how far back the camera is, Y is how far up the camera is
+var moving_camera_offset: Vector3 = Vector3(1, 1.25, 0.0)
+var zoomed_camera_offset: Vector3 = Vector3(0.5, 1.0, 1.0)
+var camera_offset: Vector3 = moving_camera_offset # X is how far back the camera is, Y is how far up the camera is
 var moving_camera_target_height: float = 0.75
 var zoomed_camera_target_height: float = 0.8
 var camera_target_height: float = moving_camera_target_height # distance above players head the camera should look (can be negative)
@@ -76,8 +76,7 @@ func _process(delta):
 	
 
 func update_camera(delta):
-	if !character.is_frozen():
-		apply_camera_move(delta)
+	apply_camera_move(delta)
 		
 	if camera && character:
 		var cms = camera_move_speed * delta if !snap_camera && !force_snap else INF
@@ -123,26 +122,29 @@ func _input(event: InputEvent):
 var delta_mouse: Vector2 = Vector2.ZERO
 func apply_camera_move(delta: float):
 	
-	var current_input_vec = Vector2(Input.get_axis("camera_right", "camera_left"), Input.get_axis("camera_up", "camera_down"))		
+	var current_input_vec = Vector2(Input.get_axis("camera_right", "camera_left"), Input.get_axis("camera_up", "camera_down"))
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		snap_camera = delta_mouse != Vector2.ZERO
 		current_input_vec += delta_mouse * Vector2(-0.175, 0.1)
 	else:
 		snap_camera = false
-	
-	camera_angle += current_input_vec.x * delta
-	
-	var scaled_y = current_input_vec.y * delta
-	if (scaled_y < 0 && (camera_offset.y + scaled_y > 0.05)) || (scaled_y > 0 && (camera_offset.y + scaled_y < 2.3)):
-		camera_offset.y += scaled_y
-		camera_offset.x += scaled_y * 0.4
-	
-	camera_angle = fmod(camera_angle, TAU)
+		
+	if character.is_frozen():
+		character.set_blade_angle(current_input_vec.y * (delta / Engine.time_scale)) # don't apply engine time scaling to this rotation, we want this to feel normal even in slomo
+	else:
+		camera_angle += current_input_vec.x * delta
+		
+		var scaled_y = current_input_vec.y * delta
+		if (scaled_y < 0 && (camera_offset.y + scaled_y > 0.05)) || (scaled_y > 0 && (camera_offset.y + scaled_y < 2.3)):
+			camera_offset.y += scaled_y
+			camera_offset.x += scaled_y * 0.4
+		
+		camera_angle = fmod(camera_angle, TAU)
 
 var move_vec: Vector2 = Vector2(0, 0)
 func handle_move_event(event: InputEvent):
 	if !character: return
-	
+
 	if event.is_action_pressed("move_forward"): move_vec.y -= 1
 	if event.is_action_released("move_forward"): move_vec.y += 1
 	if event.is_action_pressed("move_back"): move_vec.y += 1
@@ -151,12 +153,12 @@ func handle_move_event(event: InputEvent):
 	if event.is_action_released("move_left"): move_vec.x += 1
 	if event.is_action_pressed("move_right"): move_vec.x += 1
 	if event.is_action_released("move_right"): move_vec.x -= 1
-	
+
 	if character.is_frozen():
 		character.set_dir(Vector2(0, -1).rotated(-camera.global_rotation.y))
 	else:
 		character.set_dir(move_vec.normalized().rotated(-camera.global_rotation.y))
-		
+
 	if event.is_action_pressed("jump"):
 		character.jump()
 	if event.is_action_pressed("roll"):
@@ -187,10 +189,15 @@ func enter_cut_mode():
 	character.freeze_movement()
 	character.set_dir(Vector2(0, -1).rotated(-camera.global_rotation.y))
 	# zoom in the camera
+	character.blade.rotation.x = PI*0.5
 	camera_offset = zoomed_camera_offset
 	camera_target_height = zoomed_camera_target_height
-	character.tween_trans_to(0.3)
-	
+	Utils.tween_transparency_recursive(character.avatar, 0.3)
+	Utils.tween_transparency_recursive(character.blade, 0.3)
+	get_tree().create_timer(0.3).timeout.connect(func():
+		Engine.set_time_scale(0.1)
+	)
+
 func exit_cut_mode():
 	character.unfreeze_movement()
 	if move_vec == Vector2.ZERO:
@@ -199,5 +206,7 @@ func exit_cut_mode():
 	# zoom out the camera
 	camera_offset = moving_camera_offset
 	camera_target_height = moving_camera_target_height
-	character.tween_trans_to(1.0)
+	Utils.tween_transparency_recursive(character.avatar, 1.0)
+	Utils.tween_transparency_recursive(character.blade, 0.0)
+	Engine.set_time_scale(1.0)
 

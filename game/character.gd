@@ -3,6 +3,9 @@ extends CharacterBody3D
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+@onready var blade: Blade = $blade_area
+@onready var avatar: Node3D = $character_1
+
 var walk_speed: float = 100
 var run_speed: float = 200
 var crouch_speed: float = 50
@@ -209,42 +212,13 @@ func freeze_movement():
 func unfreeze_movement():
 	_start_walk()
 
-var current_transparency: float = 1.0
-var trans_tween: Tween
-func tween_trans_to(target: float, duration: float = 0.5):
-	if trans_tween != null:
-		trans_tween.stop()
-	trans_tween = get_tree().create_tween()
-	trans_tween.tween_method(func(i):
-		current_transparency = i
-		set_transparency(i)
-	, current_transparency, target, duration)
-	trans_tween.play()
-	
-func set_transparency(trans: float = 1.0):
-	for child in $character_1.get_children():
-		if child is MeshInstance3D:
-			for surf_idx in range(child.get_surface_override_material_count()):
-				var current_surf: StandardMaterial3D = child.get_surface_override_material(surf_idx)
-				if current_surf == null: continue
-				current_surf.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-				current_surf.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_ALWAYS
-				current_surf.albedo_color.a = trans
-				child.set_surface_override_material(surf_idx, current_surf)
-			for surf_idx in range(child.mesh.get_surface_count()):
-				var current_surf: StandardMaterial3D = child.mesh.surface_get_material(surf_idx)
-				if current_surf == null: continue
-				current_surf.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-				current_surf.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_ALWAYS
-				current_surf.albedo_color.a = trans
-				child.mesh.surface_set_material(surf_idx, current_surf)
-
 func is_frozen():
 	return current_state == CHARACTER_STATES.FROZEN
 
 func do_slice():
-	var blade: Blade = $blade_area
 	for body in blade.get_overlapping_bodies():
 		if body.is_in_group("sliceable"):
 			blade.slice_mesh(body)
-			
+
+func set_blade_angle(angle: float):
+	blade.rotate_z(angle)

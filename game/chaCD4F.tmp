@@ -8,7 +8,7 @@
 transparency = 1
 cull_mode = 2
 depth_draw_mode = 1
-albedo_color = Color(0.14902, 0.305882, 1, 0)
+albedo_color = Color(0.14902, 0.305882, 1, 0.337255)
 disable_receive_shadows = true
 
 [sub_resource type="QuadMesh" id="QuadMesh_ape3a"]
@@ -26,7 +26,7 @@ script = ExtResource("1_p63os")
 [node name="character_1" parent="." instance=ExtResource("1_a00ja")]
 
 [node name="blade_area" type="Area3D" parent="."]
-transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.5, 1.25)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.5, 1.25)
 script = ExtResource("3_mggos")
 
 [node name="blade_mesh" type="MeshInstance3D" parent="blade_area"]
