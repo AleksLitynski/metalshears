@@ -20,10 +20,6 @@ var current_bgm = BGM.NONE
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	play_sound_check()
-	#await get_tree().create_timer(2).timeout
-	#main_bgm_player.stop()
-	#main_bgm_player.seek(0)
-	#main_bgm_player.play(0)
 	pass
 
 
@@ -58,18 +54,6 @@ func play_bgm(bgm):
 func play_sfx():
 	sfx_player.play(0)
 
-func play_sound_check():
-	play_bgm(BGM.TITLE)
-	await get_tree().create_timer(2).timeout
-	play_bgm(BGM.MAIN)
-	await get_tree().create_timer(2).timeout
-	play_bgm(BGM.CUTTING)
-	await get_tree().create_timer(2).timeout
-	play_sfx()
-	await get_tree().create_timer(1).timeout
-	play_sfx()
-	play_bgm(BGM.NONE)
-
 # Internal functions
 
 func create_bgm_stream_player(stream, name):
@@ -90,3 +74,15 @@ func create_audio_stream_player():
 	var audio_stream_player = AudioStreamPlayer.new()
 	add_child(audio_stream_player)
 	return audio_stream_player;
+
+func play_sound_check():
+	play_bgm(BGM.TITLE)
+	await get_tree().create_timer(2).timeout
+	play_bgm(BGM.MAIN)
+	await get_tree().create_timer(2).timeout
+	play_bgm(BGM.CUTTING)
+	await get_tree().create_timer(2).timeout
+	play_sfx()
+	await get_tree().create_timer(1).timeout
+	play_sfx()
+	play_bgm(BGM.NONE)
