@@ -21,7 +21,7 @@ func _convertToArrayMesh(mesh:Mesh):
 	return new_mesh
 
 
-
+var intersect_points = []
 
 ##Slice a mesh in half using Transform3D as the local position and direction. Return an array of the sliced meshes. The cross-section material is positioned and rotated base on the Transform3D
 func slice_mesh(slice_transform:Transform3D,mesh:Mesh,cross_section_material:Material = null) -> Array:
@@ -39,6 +39,7 @@ func slice_mesh(slice_transform:Transform3D,mesh:Mesh,cross_section_material:Mat
 	var surface_tool2_2 := SurfaceTool.new()
 	surface_tool2_2.begin(Mesh.PRIMITIVE_TRIANGLES)
 	vert_slice.clear()
+	intersect_points.clear()
 	
 	if cross_section_material == null:
 		if mesh.get_surface_count() != 0:
@@ -69,6 +70,7 @@ func slice_mesh(slice_transform:Transform3D,mesh:Mesh,cross_section_material:Mat
 			if verts_side[v1] != verts_side[v2] and verts_side[v2] != 0 and verts_side[v1] != 0:
 				var intersect = _line_plane_intersection(v1_at,v2_at,at,normal)
 				if intersect != null:
+					intersect_points.push_back(intersect)
 					if intersect != v2_at and intersect != v1_at:
 						var norm = mdt.get_vertex_normal(v2)
 						var uv = mdt.get_vertex_uv(v1) + (mdt.get_vertex_uv(v2)-mdt.get_vertex_uv(v1))*(v1_at.distance_to(intersect)/v1_at.distance_to(v2_at))

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dddwcdrks06aj"]
+
+[ext_resource type="Shader" uid="uid://cuqfq8arxxpfm" path="res://particle_burst.tres" id="1_s6wb2"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lpex5"]
+direction = Vector3(1, 1, 0)
+spread = 83.2
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, -3, 0)
+turbulence_enabled = true
+turbulence_noise_strength = 5.0
+turbulence_noise_scale = 10.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_36l0b"]
+render_priority = 0
+shader = ExtResource("1_s6wb2")
+shader_parameter/particle_color = Color(0.27451, 0.184314, 0.078431, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_smjn7"]
+material = SubResource("ShaderMaterial_36l0b")
+size = Vector2(0.5, 0.5)
+
+[node name="ParticleBurst" type="GPUParticles3D"]
+amount = 10
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_lpex5")
+draw_pass_1 = SubResource("QuadMesh_smjn7")

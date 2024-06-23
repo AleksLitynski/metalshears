@@ -25,6 +25,45 @@ func slice_mesh(target: CollisionObject3D):
 	# generate two meshes
 	var meshes = mesh_slicer.slice_mesh(blade_transform, mesh.mesh, preload("res://test_cube_interior.tres"))
 	
+	if mesh.mesh.get_aabb().get_volume() >= 0.2:
+		var unique_points = {}
+		for p in mesh_slicer.intersect_points:
+			unique_points[p] = true
+		var desired_points = []
+		for up in unique_points.keys():
+			desired_points.push_back(up)
+		var blade_pos = mesh.to_local(global_position)
+		desired_points.sort_custom(func(a: Vector3, b: Vector3): return a.distance_to(blade_pos) > b.distance_to(blade_pos))
+		var max_ptrs = max(1, roundi(mesh.mesh.get_aabb().get_volume() * 10))
+		if desired_points.size() > max_ptrs:
+			desired_points = desired_points.slice(0, max_ptrs)
+			
+		
+		(func():
+			await get_tree().create_timer(0.1).timeout
+			for pt in desired_points:
+				var burst: GPUParticles3D = preload("res://particle_burst.tscn").instantiate()
+				burst.draw_pass_1 = burst.draw_pass_1.duplicate()
+				if randf() > 0.5:
+					var mat = burst.draw_pass_1.surface_get_material(0).duplicate()
+					mat.set_shader_parameter("particle_color", Color(255, 0, 0))
+					burst.draw_pass_1.surface_set_material(0, mat)
+				else:
+					var mat = burst.draw_pass_1.surface_get_material(0).duplicate()
+					mat.set_shader_parameter("particle_color", Color(70, 47, 20))
+					burst.draw_pass_1.surface_set_material(0, mat)
+					
+				mesh.add_child(burst)
+				burst.position = pt
+				burst.emitting = true
+				burst.one_shot = true
+				get_tree().create_timer(1.0).timeout.connect(func():
+					get_tree().root.remove_child(burst)
+				)
+				await get_tree().create_timer(0.05).timeout
+		).call()
+		
+	
 	
 	# make a copy of the collision object
 	var target_copy = target.duplicate()
@@ -45,9 +84,8 @@ func slice_mesh(target: CollisionObject3D):
 		target_copy.center_of_mass_mode = 1
 		target_copy.center_of_mass = target.to_local(target_copy.get_node("mesh").to_global(calculate_center_of_mass(meshes[1])))
 		target_copy.mass = max(0.05, (target_copy.mass / origional_volume) * meshes[1].get_aabb().get_volume())
-		target_copy.apply_central_force((meshes[1].get_aabb().get_center() - origional_center).normalized() * explosive_force)
+		target_copy.apply_central_force((meshes[1].get_aabb().get_center() - origional_center).normalized() * explosive_force / Engine.time_scale)
 		
-	
 	
 func calculate_center_of_mass(mesh:ArrayMesh):
 	#Not sure how well this work

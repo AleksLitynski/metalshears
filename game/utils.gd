@@ -36,10 +36,11 @@ static func set_transparency(node: MeshInstance3D, target: float):
 		var current_mat = node.get_surface_override_material(surf_idx)
 		if set_mat_transparency(current_mat, target):
 			node.set_surface_override_material(surf_idx, current_mat)
-	for surf_idx in range(node.mesh.get_surface_count()):
-		var current_mat = node.mesh.surface_get_material(surf_idx)
-		if set_mat_transparency(current_mat, target):
-			node.mesh.surface_set_material(surf_idx, current_mat)
+	if node.mesh:
+		for surf_idx in range(node.mesh.get_surface_count()):
+			var current_mat = node.mesh.surface_get_material(surf_idx)
+			if set_mat_transparency(current_mat, target):
+				node.mesh.surface_set_material(surf_idx, current_mat)
 
 static func tween_transparency_recursive(node: Node, target: float, duration: float = 0.5):
 	tween_transparency(node, target, duration, Utils.set_transparency_recursive)

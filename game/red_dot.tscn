@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://d35aejdhase0y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ir2s"]
+albedo_color = Color(1, 0.254902, 0.219608, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_tibys"]
+material = SubResource("StandardMaterial3D_0ir2s")
+radius = 0.25
+height = 0.5
+
+[node name="RedDot" type="MeshInstance3D"]
+mesh = SubResource("SphereMesh_tibys")
