@@ -7,6 +7,8 @@ var camera: Camera3D
 
 # Camera Position
 var camera_angle: float = 0 # point on circle around the player
+var camera_freeze_angle: float = 0
+
 var moving_camera_offset: Vector3 = Vector3(1, 0.5, 0.0)
 var zoomed_camera_offset: Vector3 = Vector3(0.3, 1.0, 0.5)
 var camera_offset: Vector3 = moving_camera_offset # X is how far back the camera is, Y is how far up the camera is
@@ -139,14 +141,17 @@ func apply_camera_move(delta: float):
 		
 	if character.is_frozen():
 		# don't apply engine time scaling to this rotation, we want this to feel normal even in slomo
-		character.set_blade_angle(current_input_vec.y * (delta / Engine.time_scale))
+		character.set_blade_angle(-main.fake_mouse.angle_from_center() + deg_to_rad(90))
 		current_input_vec.y = 0
 		current_input_vec.x = 0 # (current_input_vec.x / Engine.time_scale) * 0.25
 
 	camera_angle += current_input_vec.x * delta
-	
-	var scaled_y = current_input_vec.y * delta
-	if (scaled_y < 0 && (camera_offset.y + scaled_y > 0.05)) || (scaled_y > 0 && (camera_offset.y + scaled_y < 2.3)):
+	apply_camera_vertical(current_input_vec.y * delta, 0.05, 2.3)
+	camera_angle = fmod(camera_angle, TAU)
+
+func apply_camera_vertical(y_delta: float, min: float, max: float):
+	var scaled_y = y_delta
+	if (scaled_y < 0 && (camera_offset.y + scaled_y > min)) || (scaled_y > 0 && (camera_offset.y + scaled_y < max)):
 		camera_offset.y += scaled_y
 		camera_offset.x += scaled_y * 0.4
 	
@@ -168,8 +173,14 @@ func handle_move_event(event: InputEvent):
 	if character.is_frozen():
 		# move controls are used to tilt the camera when we're frozen
 		snap_camera = true
-		camera_angle -= move_vec.x * 0.03 # * (delta / Engine.time_scale)
-		camera_angle = fmod(camera_angle, TAU)
+		# let the character control the camera angle when frozen, but not more than 45deg left and right
+		var new_angle = fmod(camera_angle - move_vec.x * 0.03, TAU)
+		var angle_diff = angle_difference(new_angle, camera_freeze_angle) 
+		if angle_diff < deg_to_rad(45) and angle_diff > deg_to_rad(-45):
+			camera_angle = new_angle
+		
+		apply_camera_vertical(-move_vec.y * 0.04, 0.5, 1.3)
+		character.tilt_blade(-move_vec.y * 0.035)
 		#current_input_vec.y = 0
 		#current_input_vec.x = 0 # (current_input_vec.x / Engine.time_scale) * 0.25
 		
@@ -220,6 +231,9 @@ func snap_time(duration: float, todo: Callable):
 
 func enter_cut_mode():
 	main.sound_manager.play_bgm(SoundManager.BGM.CUTTING, 10)
+	camera_freeze_angle = camera_angle
+	main.fake_mouse.reset_mouse()
+	main.fake_mouse.fake_mouse_visible = true
 	character.freeze_movement()
 	camera_move_speed = 5.0
 	camera_rotate_speed = 2.0
@@ -241,6 +255,7 @@ func enter_cut_mode():
 
 func exit_cut_mode():
 	main.sound_manager.play_bgm(SoundManager.BGM.MAIN)
+	main.fake_mouse.fake_mouse_visible = false
 	character.unfreeze_movement()
 	camera_move_speed = 5.0
 	camera_rotate_speed = 2.0

@@ -38,7 +38,7 @@ script = ExtResource("1_p63os")
 [node name="character_1" parent="." instance=ExtResource("1_a00ja")]
 
 [node name="blade_tilt" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.740638, 0.192244)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.599895, 0.192244)
 
 [node name="blade_area" type="Area3D" parent="blade_tilt"]
 unique_name_in_owner = true

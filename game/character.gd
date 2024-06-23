@@ -3,7 +3,8 @@ extends CharacterBody3D
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-@onready var blade: Blade = $blade_area
+@onready var blade: Blade = %blade_area
+@onready var blade_tilt: Node3D = $blade_tilt
 @onready var avatar: Node3D = $character_1
 
 var walk_speed: float = 100
@@ -217,4 +218,9 @@ func do_slice():
 			blade.slice_mesh(body)
 
 func set_blade_angle(angle: float):
-	blade.rotate_z(angle)
+	blade.rotation.x = angle
+	
+func tilt_blade(angle: float):
+	var new_angle = blade_tilt.rotation.x + angle 
+	if new_angle <= deg_to_rad(25) and new_angle >= deg_to_rad(-20):
+		blade_tilt.rotation.x = new_angle

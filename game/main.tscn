@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dtuxpie420j5d"]
+[gd_scene load_steps=12 format=3 uid="uid://dtuxpie420j5d"]
 
 [ext_resource type="PackedScene" uid="uid://felyvflwfi0s" path="res://arena.tscn" id="1_6qgla"]
 [ext_resource type="Script" path="res://main.gd" id="1_dyjth"]
@@ -7,9 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://ccixdgb8d7t3b" path="res://test_cube.tscn" id="3_jkn8q"]
 [ext_resource type="FontFile" uid="uid://c2gks3e0rwwkt" path="res://fonts/ALBAS___.TTF" id="4_sohwu"]
 [ext_resource type="Texture2D" uid="uid://dghc2g2ghkh8n" path="res://images/shears.png" id="6_djexm"]
-[ext_resource type="Script" path="res://FakeMouse.gd" id="6_k0408"]
+[ext_resource type="Script" path="res://fake_mouse.gd" id="6_k0408"]
 [ext_resource type="PackedScene" uid="uid://dvshpap15hwq" path="res://sound_manager.tscn" id="7_05ylg"]
-
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_menp2"]
 bg_color = Color(0.192157, 0.141176, 0.6, 1)
@@ -115,11 +114,13 @@ layout_mode = 2
 text = "Metal Shears: Styled Lid"
 label_settings = SubResource("LabelSettings_2a823")
 
+[node name="CenterpointMarker" type="Sprite2D" parent="Control"]
+scale = Vector2(0.5, 0.5)
 
 [node name="FakeMouse" type="Sprite2D" parent="Control"]
+unique_name_in_owner = true
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_djexm")
 script = ExtResource("6_k0408")
 
 [node name="SoundManager" parent="." instance=ExtResource("7_05ylg")]
-
