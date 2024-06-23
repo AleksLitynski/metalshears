@@ -1,0 +1,16 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://blje3v4tkaec1"]
+
+[ext_resource type="Texture2D" uid="uid://ekotcrkpgyux" path="res://images/circle.png" id="1_d653a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5cvyw"]
+
+[resource]
+next_pass = SubResource("ShaderMaterial_5cvyw")
+transparency = 4
+cull_mode = 2
+depth_draw_mode = 1
+albedo_color = Color(0.247059, 0.345098, 1, 0.576471)
+albedo_texture = ExtResource("1_d653a")
+uv1_scale = Vector3(10, 10, 10)
+uv1_offset = Vector3(20, 20, 20)
+uv1_triplanar = true

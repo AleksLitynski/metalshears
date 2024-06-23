@@ -17,7 +17,7 @@ var current_bgm = BGM.NONE
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Uncomment and run scene to perform sound check.
-	# play_sound_check()
+	play_sound_check()
 	pass
 
 

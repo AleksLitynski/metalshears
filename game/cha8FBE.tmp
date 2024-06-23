@@ -1,0 +1,52 @@
+[gd_scene load_steps=11 format=3 uid="uid://b0qsf2n6rekoh"]
+
+[ext_resource type="PackedScene" uid="uid://p043a6a42mch" path="res://models/character_1.blend" id="1_a00ja"]
+[ext_resource type="Script" path="res://character.gd" id="1_p63os"]
+[ext_resource type="Script" path="res://blade.gd" id="3_mggos"]
+[ext_resource type="Shader" path="res://blade_glow.gdshader" id="4_0umyy"]
+
+[sub_resource type="Gradient" id="Gradient_lh1gb"]
+offsets = PackedFloat32Array(0, 0.258741, 0.575758, 0.820513)
+colors = PackedColorArray(0, 0, 0, 0.176471, 0.481862, 0.481862, 0.481862, 0.481862, 0.696023, 0.696023, 0.696023, 0.696023, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_v7i7p"]
+gradient = SubResource("Gradient_lh1gb")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7cumv"]
+render_priority = 0
+shader = ExtResource("4_0umyy")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ec0d"]
+next_pass = SubResource("ShaderMaterial_7cumv")
+transparency = 1
+cull_mode = 2
+depth_draw_mode = 1
+albedo_color = Color(0.145098, 0.286275, 1, 1)
+albedo_texture = SubResource("GradientTexture2D_v7i7p")
+ao_light_affect = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_ape3a"]
+material = SubResource("StandardMaterial3D_1ec0d")
+size = Vector2(2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5kkm3"]
+size = Vector3(2.02533, 2.01898, 0.019928)
+
+[node name="character" type="CharacterBody3D"]
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+script = ExtResource("1_p63os")
+
+[node name="character_1" parent="." instance=ExtResource("1_a00ja")]
+
+[node name="blade_area" type="Area3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.5, 1.25)
+script = ExtResource("3_mggos")
+
+[node name="blade_mesh" type="MeshInstance3D" parent="blade_area"]
+mesh = SubResource("QuadMesh_ape3a")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="blade_area"]
+transform = Transform3D(0.999979, 0, -3.33955e-13, 0, 1, 0, 3.33955e-13, 0, 0.999979, 0.00283885, 0.000152588, 0.000960523)
+shape = SubResource("BoxShape3D_5kkm3")

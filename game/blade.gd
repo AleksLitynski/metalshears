@@ -4,7 +4,7 @@ extends Area3D
 
 var mesh_slicer = MeshSlicer.new()
 
-var explosive_force: float = 75
+var explosive_force: float = 200
 
 func slice_mesh(target: CollisionObject3D):
 	var shape: CollisionShape3D = target.get_node("shape")

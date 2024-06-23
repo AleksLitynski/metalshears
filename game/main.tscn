@@ -11,6 +11,7 @@
 [node name="sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.639721, 0.571823, -0.513591, 0, 0.668209, 0.743973, 0.768607, -0.475935, 0.427467, -48.9612, 111.955, 29.6787)
 light_color = Color(1, 0.913725, 0.776471, 1)
+light_energy = 0.5
 shadow_enabled = true
 
 [node name="player" parent="." instance=ExtResource("2_36kpo")]

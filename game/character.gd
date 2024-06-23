@@ -34,6 +34,7 @@ enum CHARACTER_STATES {
 var current_state: CHARACTER_STATES = CHARACTER_STATES.WALK
 
 func _ready():
+	Utils.set_transparency_recursive(blade, 0.0)
 	HoistPhysicsShapes.Hoist(self, $character_1)
 
 var queued_dir: Vector2 = Vector2.ZERO
@@ -41,7 +42,6 @@ func set_dir(dir: Vector2):
 	queued_dir = dir
 	if current_state != CHARACTER_STATES.ROLL:
 		input_vec = dir
-		
 
 func _process(delta):
 	if turn_to_face_input:

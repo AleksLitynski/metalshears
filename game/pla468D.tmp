@@ -7,5 +7,3 @@ script = ExtResource("1_herwv")
 
 [node name="camera" type="Camera3D" parent="."]
 unique_name_in_owner = true
-
-[node name="Timer" type="Timer" parent="."]
