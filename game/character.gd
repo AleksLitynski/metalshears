@@ -69,9 +69,6 @@ func _physics_process(delta):
 		velocity.y = 0
 		_end_jump()
 	
-	
-
-	
 	#var children = ""
 	#for c in get_children():
 		#children += c.name + ", "
@@ -91,7 +88,6 @@ func jump():
 	# input_vec = queued_dir
 	_start_jump() # will fail if we aren't allowed to jump
 	
-		
 func _start_jump():
 	jumping_from_run = false
 	var jump_starting_velo = Vector3(input_vec.x * move_speed * 0.02, jump_strength, input_vec.y * move_speed * 0.02)

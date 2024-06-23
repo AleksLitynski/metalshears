@@ -24,7 +24,7 @@ uniform float force_alpha = 1.0;
 uniform sampler2D depth_texture : source_color, hint_depth_texture;
 
 varying mat4 CAMERA;
-const float thickness = 0.1;
+const float thickness = 0.2;
 
 
 
@@ -42,7 +42,7 @@ void vertex() {
 	uv1_power_normal=pow(abs(NORMAL),vec3(uv1_blend_sharpness));
 	uv1_triplanar_pos = VERTEX * uv1_scale + uv1_offset;
 	uv1_power_normal/=dot(uv1_power_normal,vec3(1.0));
-	uv1_triplanar_pos *= vec3(1.0,-1.0, 1.0);
+	uv1_triplanar_pos *= vec3(2.0,-1.0, 2.0);
 	
 }
 
@@ -79,11 +79,12 @@ void fragment() {
 	{
 		if (distance(view.xyz, VERTEX) < thickness / view.w)
 		{
-			ALPHA = 1.0;
-			ALBEDO *= 20.0;
-			EMISSION = vec3(0.2, 0.2, 0.9) * 0.5;
+			float percent = min(1.0, (1.0 - distance(view.xyz, VERTEX) / (thickness / view.w)) + 0.2);
+			ALPHA = 1.0 * percent;
+			ALBEDO *= 20.0 * percent;
+			EMISSION = vec3(0.2, 0.2, 0.9) * 0.5 * percent;
 		}
-		else if(distance(view.xyz, VERTEX) < (thickness / view.w) * 30.0)
+		else if(distance(view.xyz, VERTEX) < (thickness / view.w) * 15.0)
 		{
 			ALPHA = (smoothstep(view.z + 0.8, view.z, VERTEX.z) * 1.0);
 		}
@@ -92,8 +93,9 @@ void fragment() {
 		}
 		
 		ALPHA *= albedo.a * albedo_tex.a;
-		ALPHA *= (sin(TIME * 3.0 + 0.3)*0.5 + 1.0) * 2.0;
-		ALBEDO *= (sin(TIME * 3.0) * 0.5 + 1.0) * 0.5;
+		// we always run this in bullet time, so TIME is going to be really small
+		ALPHA  *= (sin(TIME * 35.0) * 0.5 + 1.0) * 1.0;
+		ALBEDO *= (sin(TIME * 35.0) * 0.5 + 1.0) * 0.5;
 	}
 	
 	BACKLIGHT = vec3(5.0);
