@@ -1,7 +1,7 @@
 class_name Player
 extends Node3D
 
-
+var main:Main
 var character: Character
 var camera: Camera3D
 
@@ -28,6 +28,7 @@ var camera_input_button_speed = 2.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	main = get_tree().get_first_node_in_group("main")
 	character = preload("res://character.tscn").instantiate()
 	character.global_position.y = 2
 	add_child(character)
@@ -191,6 +192,7 @@ func handle_move_event(event: InputEvent):
 func handle_action_event(event: InputEvent):
 	if event.is_action_pressed("right_hand_primary"):
 		if character.is_frozen():
+			main.sound_manager.play_sfx()
 			character.do_slice()
 	if event.is_action_pressed("right_hand_secondary"):
 		enter_cut_mode()
@@ -217,6 +219,7 @@ func snap_time(duration: float, todo: Callable):
 	snap_timer.start()
 
 func enter_cut_mode():
+	main.sound_manager.play_bgm(SoundManager.BGM.CUTTING, 10)
 	character.freeze_movement()
 	camera_move_speed = 5.0
 	camera_rotate_speed = 2.0
@@ -237,6 +240,7 @@ func enter_cut_mode():
 	, camera.fov, 60, 0.5)
 
 func exit_cut_mode():
+	main.sound_manager.play_bgm(SoundManager.BGM.MAIN)
 	character.unfreeze_movement()
 	camera_move_speed = 5.0
 	camera_rotate_speed = 2.0

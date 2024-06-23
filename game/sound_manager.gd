@@ -17,7 +17,7 @@ var current_bgm = BGM.NONE
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Uncomment and run scene to perform sound check.
-	play_sound_check()
+	# play_sound_check()
 	pass
 
 
@@ -28,7 +28,8 @@ func _process(_delta):
 # Public functions
 
 # Play or switch to a new background music
-func play_bgm(bgm):
+# set crossfade_speed to higher values if engine time is adusted.
+func play_bgm(bgm, crossfade_speed = 1):
 	if (bgm == BGM.NONE):
 		title_bgm_player.stop()
 		main_bgm_player.stop()
@@ -39,10 +40,10 @@ func play_bgm(bgm):
 		cutting_bgm_player.stop()
 	elif (bgm == BGM.MAIN):
 		title_bgm_player.stop()
-		animation_player.play("CrossfadeCuttingToMain")
+		animation_player.play("CrossfadeCuttingToMain", -1, crossfade_speed)
 	elif (bgm == BGM.CUTTING):
 		title_bgm_player.stop()
-		animation_player.play("CrossfadeMainToCutting")
+		animation_player.play("CrossfadeMainToCutting", -1, crossfade_speed)
 	else:
 		print("Unknown bgm: " + bgm)
 	
