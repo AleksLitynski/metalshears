@@ -40,7 +40,7 @@ func slice_mesh(target: CollisionObject3D):
 			
 		
 		(func():
-			await get_tree().create_timer(0.1).timeout
+			await get_tree().create_timer(0.01).timeout
 			for pt in desired_points:
 				var burst: GPUParticles3D = preload("res://particle_burst.tscn").instantiate()
 				burst.draw_pass_1 = burst.draw_pass_1.duplicate()

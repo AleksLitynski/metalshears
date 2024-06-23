@@ -79,6 +79,11 @@ func _process(delta):
 	
 	delta_mouse = Vector2.ZERO
 	
+	if character.is_frozen():
+		# zero out movement
+		character.set_dir(Vector2(0, -1).rotated(-camera.global_rotation.y))
+		
+	
 
 func update_camera(delta):
 	apply_camera_move(delta)
@@ -136,7 +141,7 @@ func apply_camera_move(delta: float):
 		# don't apply engine time scaling to this rotation, we want this to feel normal even in slomo
 		character.set_blade_angle(current_input_vec.y * (delta / Engine.time_scale))
 		current_input_vec.y = 0
-		current_input_vec.x = (current_input_vec.x / Engine.time_scale) * 0.25
+		current_input_vec.x = 0 # (current_input_vec.x / Engine.time_scale) * 0.25
 
 	camera_angle += current_input_vec.x * delta
 	
@@ -161,7 +166,17 @@ func handle_move_event(event: InputEvent):
 	if event.is_action_released("move_right"): move_vec.x -= 1
 
 	if character.is_frozen():
+		# move controls are used to tilt the camera when we're frozen
+		snap_camera = true
+		camera_angle -= move_vec.x * 0.03 # * (delta / Engine.time_scale)
+		camera_angle = fmod(camera_angle, TAU)
+		#current_input_vec.y = 0
+		#current_input_vec.x = 0 # (current_input_vec.x / Engine.time_scale) * 0.25
+		
+		# zero out movement
 		character.set_dir(Vector2(0, -1).rotated(-camera.global_rotation.y))
+		
+		
 	else:
 		character.set_dir(move_vec.normalized().rotated(-camera.global_rotation.y))
 
@@ -207,6 +222,7 @@ func enter_cut_mode():
 	main.sound_manager.play_bgm(SoundManager.BGM.CUTTING, 10)
 	character.freeze_movement()
 	camera_move_speed = 5.0
+	camera_rotate_speed = 2.0
 	character.set_dir(Vector2(0, -1).rotated(-camera.global_rotation.y))
 	# zoom in the camera
 	character.blade.rotation.x = PI*0.5
@@ -215,6 +231,8 @@ func enter_cut_mode():
 	Utils.tween_transparency_recursive(character.avatar, 0.3, 0.5)
 	Utils.tween_transparency_recursive(character.blade, 1.0, 0.5)
 	snap_time(0.5, func():
+		camera_move_speed = 8.0
+		camera_rotate_speed = 9.0
 		Engine.set_time_scale(0.1)
 	)
 	get_tree().create_tween().tween_method(func(i):
@@ -224,6 +242,8 @@ func enter_cut_mode():
 func exit_cut_mode():
 	main.sound_manager.play_bgm(SoundManager.BGM.MAIN)
 	character.unfreeze_movement()
+	camera_move_speed = 5.0
+	camera_rotate_speed = 2.0
 	if move_vec == Vector2.ZERO:
 		character.set_dir(Vector2.ZERO)
 	character.move_speed = character.walk_speed
@@ -235,6 +255,7 @@ func exit_cut_mode():
 	Engine.set_time_scale(1.0)
 	snap_time(0.5, func():
 		camera_move_speed = INF
+		camera_rotate_speed = 2.0
 	)
 	get_tree().create_tween().tween_method(func(i):
 		camera.fov = i
