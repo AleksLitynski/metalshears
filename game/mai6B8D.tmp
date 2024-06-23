@@ -1,12 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dtuxpie420j5d"]
+[gd_scene load_steps=8 format=3 uid="uid://dtuxpie420j5d"]
 
 [ext_resource type="PackedScene" uid="uid://felyvflwfi0s" path="res://arena.tscn" id="1_6qgla"]
 [ext_resource type="PackedScene" uid="uid://bwjcmdmj0qx6q" path="res://player.tscn" id="2_36kpo"]
 [ext_resource type="PackedScene" uid="uid://ntnf0asb8sb3" path="res://test_cube_big.tscn" id="3_052au"]
 [ext_resource type="PackedScene" uid="uid://ccixdgb8d7t3b" path="res://test_cube.tscn" id="3_jkn8q"]
 [ext_resource type="FontFile" uid="uid://c2gks3e0rwwkt" path="res://fonts/ALBAS___.TTF" id="4_sohwu"]
-[ext_resource type="Texture2D" uid="uid://dghc2g2ghkh8n" path="res://images/shears.png" id="6_djexm"]
-[ext_resource type="Script" path="res://FakeMouse.gd" id="6_k0408"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_menp2"]
 bg_color = Color(0.192157, 0.141176, 0.6, 1)
@@ -110,8 +108,3 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_menp2")
 layout_mode = 2
 text = "Metal Shears: Styled Lid"
 label_settings = SubResource("LabelSettings_2a823")
-
-[node name="FakeMouse" type="Sprite2D" parent="Control"]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("6_djexm")
-script = ExtResource("6_k0408")
