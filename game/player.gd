@@ -181,8 +181,6 @@ func handle_move_event(event: InputEvent):
 		
 		apply_camera_vertical(-move_vec.y * 0.04, 0.5, 1.3)
 		character.tilt_blade(-move_vec.y * 0.035)
-		#current_input_vec.y = 0
-		#current_input_vec.x = 0 # (current_input_vec.x / Engine.time_scale) * 0.25
 		
 		# zero out movement
 		character.set_dir(Vector2(0, -1).rotated(-camera.global_rotation.y))
@@ -231,6 +229,7 @@ func snap_time(duration: float, todo: Callable):
 
 func enter_cut_mode():
 	main.sound_manager.play_bgm(SoundManager.BGM.CUTTING, 10)
+	character.blade_tilt.rotation.x = 0
 	camera_freeze_angle = camera_angle
 	main.fake_mouse.reset_mouse()
 	main.fake_mouse.fake_mouse_visible = true
