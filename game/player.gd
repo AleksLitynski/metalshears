@@ -174,13 +174,13 @@ func handle_move_event(event: InputEvent):
 		# move controls are used to tilt the camera when we're frozen
 		snap_camera = true
 		# let the character control the camera angle when frozen, but not more than 45deg left and right
-		var new_angle = fmod(camera_angle - move_vec.x * 0.03, TAU)
+		var new_angle = fmod(camera_angle - move_vec.x * 0.04, TAU)
 		var angle_diff = angle_difference(new_angle, camera_freeze_angle) 
 		if angle_diff < deg_to_rad(45) and angle_diff > deg_to_rad(-45):
 			camera_angle = new_angle
 		
-		apply_camera_vertical(-move_vec.y * 0.04, 0.5, 1.3)
-		character.tilt_blade(-move_vec.y * 0.035)
+		apply_camera_vertical(move_vec.y * 0.04, 0.6, 1.2)
+		character.tilt_blade(move_vec.y * 0.03)
 		
 		# zero out movement
 		character.set_dir(Vector2(0, -1).rotated(-camera.global_rotation.y))
