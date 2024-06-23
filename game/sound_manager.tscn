@@ -127,6 +127,7 @@ bus = &"Main BGM"
 
 [node name="CuttingBgmPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_86jky")
+volume_db = -80.0
 bus = &"Cutting BGM"
 
 [node name="SfxPlayer" type="AudioStreamPlayer" parent="."]

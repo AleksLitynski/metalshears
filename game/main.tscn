@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://dtuxpie420j5d"]
+[gd_scene load_steps=10 format=3 uid="uid://dtuxpie420j5d"]
 
 [ext_resource type="PackedScene" uid="uid://felyvflwfi0s" path="res://arena.tscn" id="1_6qgla"]
+[ext_resource type="Script" path="res://main.gd" id="1_dyjth"]
 [ext_resource type="PackedScene" uid="uid://bwjcmdmj0qx6q" path="res://player.tscn" id="2_36kpo"]
 [ext_resource type="PackedScene" uid="uid://ntnf0asb8sb3" path="res://test_cube_big.tscn" id="3_052au"]
 [ext_resource type="PackedScene" uid="uid://ccixdgb8d7t3b" path="res://test_cube.tscn" id="3_jkn8q"]
 [ext_resource type="FontFile" uid="uid://c2gks3e0rwwkt" path="res://fonts/ALBAS___.TTF" id="4_sohwu"]
+[ext_resource type="PackedScene" uid="uid://dvshpap15hwq" path="res://sound_manager.tscn" id="7_05ylg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_menp2"]
 bg_color = Color(0.192157, 0.141176, 0.6, 1)
@@ -31,7 +33,8 @@ font_size = 48
 font_color = Color(1, 0.670588, 0.341176, 1)
 shadow_size = 0
 
-[node name="main" type="Node3D"]
+[node name="main" type="Node3D" groups=["main"]]
+script = ExtResource("1_dyjth")
 
 [node name="arena" parent="." instance=ExtResource("1_6qgla")]
 
@@ -108,3 +111,5 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_menp2")
 layout_mode = 2
 text = "Metal Shears: Styled Lid"
 label_settings = SubResource("LabelSettings_2a823")
+
+[node name="SoundManager" parent="." instance=ExtResource("7_05ylg")]
