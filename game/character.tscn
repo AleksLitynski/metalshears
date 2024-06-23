@@ -1,10 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0qsf2n6rekoh"]
+[gd_scene load_steps=10 format=3 uid="uid://b0qsf2n6rekoh"]
 
-[ext_resource type="PackedScene" uid="uid://p043a6a42mch" path="res://models/character_1.blend" id="1_a00ja"]
 [ext_resource type="Script" path="res://character.gd" id="1_p63os"]
+[ext_resource type="PackedScene" uid="uid://bck3q5vjku7qx" path="res://barber_character.tscn" id="2_serxv"]
 [ext_resource type="Script" path="res://blade.gd" id="3_mggos"]
 [ext_resource type="Shader" path="res://blade_glow_full.gdshader" id="4_0e060"]
 [ext_resource type="Texture2D" uid="uid://ekotcrkpgyux" path="res://images/circle.png" id="4_2mxho"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xv3ti"]
+radius = 0.2
+height = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d4fm1"]
 render_priority = 0
@@ -35,10 +39,15 @@ axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource("1_p63os")
 
-[node name="character_1" parent="." instance=ExtResource("1_a00ja")]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.514036, 0)
+shape = SubResource("CapsuleShape3D_xv3ti")
+
+[node name="barber" parent="." instance=ExtResource("2_serxv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0036456, 0)
 
 [node name="blade_tilt" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.740638, 0.192244)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.740638, 0.2735)
 
 [node name="blade_area" type="Area3D" parent="blade_tilt"]
 unique_name_in_owner = true

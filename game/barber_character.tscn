@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bck3q5vjku7qx"]
+
+[ext_resource type="Script" path="res://barber_character.gd" id="1_f231t"]
+[ext_resource type="PackedScene" uid="uid://ccv0qrapch44u" path="res://models/barber.gltf" id="2_wqsil"]
+
+[sub_resource type="Animation" id="Animation_d7j33"]
+resource_name = "roll_fix"
+length = 2.3667
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Barber")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0.5, 0, 0.7, 1, 0, 0.5, 0.2, 1.44, 1, 0, 0.5, -0.8, 2.3667, 1, 0, 0.5, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4mkks"]
+_data = {
+"roll_fix": SubResource("Animation_d7j33")
+}
+
+[node name="BarberCharacter" type="Node3D"]
+script = ExtResource("1_f231t")
+
+[node name="Barber" parent="." instance=ExtResource("2_wqsil")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="RollFixer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4mkks")
+}

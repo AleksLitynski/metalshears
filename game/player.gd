@@ -95,7 +95,8 @@ func update_camera(delta):
 		var cms = camera_move_speed * delta if !force_snap else INF
 		var crs = camera_rotate_speed * delta if !snap_camera && !force_snap else INF
 		
-		camera.global_position = camera.global_position.move_toward(target_camera_position(), cms)
+		var target = target_camera_position()
+		camera.global_position = camera.global_position.move_toward(target, cms)
 		
 		var prev_cam_y = camera.global_rotation.y
 		camera.global_rotation.y = 0 # zero out the y so we can set the angle of without having to rotate anything weird
@@ -241,7 +242,7 @@ func enter_cut_mode():
 	character.blade.rotation.x = PI*0.5
 	camera_offset = zoomed_camera_offset
 	camera_target_height = zoomed_camera_target_height
-	Utils.tween_transparency_recursive(character.avatar, 0.3, 0.5)
+	Utils.tween_transparency_recursive(character.barber, 0.3, 0.5)
 	Utils.tween_transparency_recursive(character.blade, 1.0, 0.5)
 	snap_time(0.5, func():
 		camera_move_speed = 8.0
@@ -264,7 +265,7 @@ func exit_cut_mode():
 	# zoom out the camera
 	camera_offset = moving_camera_offset
 	camera_target_height = moving_camera_target_height
-	Utils.tween_transparency_recursive(character.avatar, 1.0, 0.5)
+	Utils.tween_transparency_recursive(character.barber, 1.0, 0.5)
 	Utils.tween_transparency_recursive(character.blade, 0.0, 0.5)
 	Engine.set_time_scale(1.0)
 	snap_time(0.5, func():
