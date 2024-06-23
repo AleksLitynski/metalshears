@@ -203,7 +203,7 @@ func handle_move_event(event: InputEvent):
 func handle_action_event(event: InputEvent):
 	if event.is_action_pressed("right_hand_primary"):
 		if character.is_frozen():
-			main.sound_manager.play_sfx()
+			main.sound_manager.play_sfx(SoundManager.SFX.CLEAN_CUT)
 			character.do_slice()
 	if event.is_action_pressed("right_hand_secondary"):
 		enter_cut_mode()
