@@ -17,6 +17,7 @@ cutoff_hz = 100.0
 db = 3
 
 [resource]
+bus/0/volume_db = -10.5185
 bus/0/effect/0/effect = SubResource("AudioEffectCompressor_jfv7e")
 bus/0/effect/0/enabled = true
 bus/0/effect/1/effect = SubResource("AudioEffectLimiter_32kmm")
