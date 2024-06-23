@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dtuxpie420j5d"]
+[gd_scene load_steps=13 format=3 uid="uid://dtuxpie420j5d"]
 
 [ext_resource type="PackedScene" uid="uid://felyvflwfi0s" path="res://arena.tscn" id="1_6qgla"]
 [ext_resource type="Script" path="res://main.gd" id="1_dyjth"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://dghc2g2ghkh8n" path="res://images/shears.png" id="6_djexm"]
 [ext_resource type="Script" path="res://fake_mouse.gd" id="6_k0408"]
 [ext_resource type="PackedScene" uid="uid://dvshpap15hwq" path="res://sound_manager.tscn" id="7_05ylg"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tvyfd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_menp2"]
 bg_color = Color(0.192157, 0.141176, 0.6, 1)
@@ -39,6 +41,7 @@ shadow_size = 0
 script = ExtResource("1_dyjth")
 
 [node name="arena" parent="." instance=ExtResource("1_6qgla")]
+physics_material_override = SubResource("PhysicsMaterial_tvyfd")
 
 [node name="sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.639721, 0.571823, -0.513591, 0, 0.668209, 0.743973, 0.768607, -0.475935, 0.427467, -48.9612, 111.955, 29.6787)

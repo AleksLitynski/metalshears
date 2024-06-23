@@ -59,8 +59,9 @@ func _physics_process(delta):
 	var scaled_input = input_vec * move_speed * delta
 	if current_state == CHARACTER_STATES.JUMP:
 		# if jumping, maintain current velocity
-		scaled_input.x = velocity.x + scaled_input.x * 0.1 # 20% air control
-		scaled_input.y = velocity.z + scaled_input.y * 0.1
+		var air_control = 0.2 if !jumping_from_run else 0.1
+		scaled_input.x = velocity.x + scaled_input.x * air_control * 0.5 # 20% air control
+		scaled_input.y = velocity.z + scaled_input.y * air_control * 0.5
 	if input_vec != Vector2.ZERO && turn_to_face_input:
 		last_move_vec = input_vec
 	velocity = Vector3(scaled_input.x, velocity.y - (gravity * delta), scaled_input.y)
@@ -116,7 +117,9 @@ func _start_jump():
 			jump_starting_velo *= 0.9
 		CHARACTER_STATES.RUN:
 			jumping_from_run = true
-			jump_starting_velo *= 0.8
+			jump_starting_velo *= 0.9
+			jump_starting_velo.x *= 0.05
+			jump_starting_velo.z *= 0.05
 		_:
 			return
 		
