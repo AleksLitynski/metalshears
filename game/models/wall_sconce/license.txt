@@ -1,0 +1,11 @@
+Model Information:
+* title:	Sconce
+* source:	https://sketchfab.com/3d-models/sconce-7f65049c5020498b9ade8080a1f7d59c
+* author:	NemirovskyPeter (https://sketchfab.com/NemirovskyPeter)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Sconce" (https://sketchfab.com/3d-models/sconce-7f65049c5020498b9ade8080a1f7d59c) by NemirovskyPeter (https://sketchfab.com/NemirovskyPeter) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

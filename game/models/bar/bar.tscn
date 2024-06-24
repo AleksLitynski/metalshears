@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpifkmhbm6ete"]
+
+[ext_resource type="PackedScene" uid="uid://bunbvejcadhua" path="res://models/bar/scene.gltf" id="1_75ewq"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ocpja"]
+height = 0.770116
+radius = 1.94048
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2lkel"]
+size = Vector3(1.56488, 0.720764, 0.598145)
+
+[node name="Bar" type="Node3D"]
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_75ewq")]
+transform = Transform3D(0.00431013, 0, 0, 0, 0.00431013, 0, 0, 0, 0.00431013, -3.62152, 0.093231, 3.04644)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.92074, 0.449303, -0.0535388)
+shape = SubResource("CylinderShape3D_ocpja")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.15132, 0.48293, 0.30341)
+shape = SubResource("BoxShape3D_2lkel")

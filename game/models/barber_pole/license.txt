@@ -1,0 +1,11 @@
+Model Information:
+* title:	Barber's Pole
+* source:	https://sketchfab.com/3d-models/barbers-pole-8a6f2cd6944c44f8897948ea53e50130
+* author:	Individualist (https://sketchfab.com/666bang666bang666)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Barber's Pole" (https://sketchfab.com/3d-models/barbers-pole-8a6f2cd6944c44f8897948ea53e50130) by Individualist (https://sketchfab.com/666bang666bang666) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

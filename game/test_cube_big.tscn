@@ -14,6 +14,7 @@ size = Vector3(1, 10, 1)
 size = Vector3(1, 10, 1)
 
 [node name="TestCubeBig" type="RigidBody3D" groups=["pushable", "sliceable"]]
+mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_gnquh")
 
 [node name="mesh" type="MeshInstance3D" parent="."]
