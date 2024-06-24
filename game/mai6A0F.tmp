@@ -1,0 +1,622 @@
+[gd_scene load_steps=17 format=3 uid="uid://dtuxpie420j5d"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_dyjth"]
+[ext_resource type="PackedScene" uid="uid://bwjcmdmj0qx6q" path="res://player.tscn" id="2_36kpo"]
+[ext_resource type="PackedScene" uid="uid://cuhxt6s4b4mke" path="res://models/arena_4.glb" id="2_75cdx"]
+[ext_resource type="PackedScene" uid="uid://ntnf0asb8sb3" path="res://test_cube_big.tscn" id="3_052au"]
+[ext_resource type="PackedScene" uid="uid://bw281xffgchlb" path="res://models/barber_pole/barbar_pole.tscn" id="3_chrtn"]
+[ext_resource type="PackedScene" uid="uid://bc088rjsuudux" path="res://models/wall_sconce/wall_sconce.blend" id="3_i5ua0"]
+[ext_resource type="PackedScene" uid="uid://ccixdgb8d7t3b" path="res://test_cube.tscn" id="3_jkn8q"]
+[ext_resource type="PackedScene" uid="uid://cpifkmhbm6ete" path="res://models/bar/bar.tscn" id="3_xbxuo"]
+[ext_resource type="FontFile" uid="uid://c2gks3e0rwwkt" path="res://fonts/ALBAS___.TTF" id="4_sohwu"]
+[ext_resource type="Texture2D" uid="uid://dghc2g2ghkh8n" path="res://images/shears.png" id="6_djexm"]
+[ext_resource type="Script" path="res://fake_mouse.gd" id="6_k0408"]
+[ext_resource type="PackedScene" uid="uid://dvshpap15hwq" path="res://sound_manager.tscn" id="7_05ylg"]
+[ext_resource type="PackedScene" uid="uid://ka0qs8mo83s0" path="res://models/dumpster/dumpster.tscn" id="7_qmdhi"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mpkhv"]
+height = 1.46478
+radius = 1.49404
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_menp2"]
+bg_color = Color(0.192157, 0.141176, 0.6, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.113725, 0.0862745, 0.360784, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 20.0
+expand_margin_top = 10.0
+expand_margin_right = 20.0
+expand_margin_bottom = 10.0
+shadow_color = Color(0, 0, 0, 1)
+shadow_size = 10
+shadow_offset = Vector2(10, 10)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2a823"]
+font = ExtResource("4_sohwu")
+font_size = 24
+font_color = Color(1, 0.670588, 0.341176, 1)
+shadow_size = 0
+
+[node name="main" type="Node3D" groups=["main"]]
+script = ExtResource("1_dyjth")
+
+[node name="arena_4" parent="." instance=ExtResource("2_75cdx")]
+
+[node name="lights" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.74358, 0)
+
+[node name="Bar" parent="lights" instance=ExtResource("3_xbxuo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70886, -0.882387, -16.2197)
+
+[node name="BarbarPole" parent="lights" instance=ExtResource("3_chrtn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.15791, -0.725557, -10.3789)
+
+[node name="BarbarPole2" parent="lights" instance=ExtResource("3_chrtn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.8231, -0.725557, -10.3789)
+
+[node name="BarbarPole3" parent="lights" instance=ExtResource("3_chrtn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.98094, -0.725557, -10.3789)
+
+[node name="BarbarPole4" parent="lights" instance=ExtResource("3_chrtn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.21452, -0.725557, -10.3789)
+
+[node name="BarbarPole5" parent="lights" instance=ExtResource("3_chrtn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.42352, 2.50527, 12.6548)
+
+[node name="BarbarPole6" parent="lights" instance=ExtResource("3_chrtn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.02678, 7.06986, 12.6548)
+
+[node name="BarbarPole7" parent="lights" instance=ExtResource("3_chrtn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522686, 8.34287, -1.40405)
+
+[node name="wall_sconce" parent="lights" instance=ExtResource("3_i5ua0")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -11.3647, 5.65891, -0.547504)
+
+[node name="wall_sconce2" parent="lights" instance=ExtResource("3_i5ua0")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -11.3647, 5.65891, 9.33126)
+
+[node name="wall_sconce3" parent="lights" instance=ExtResource("3_i5ua0")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -9.47671, 2.43698, -16.1357)
+
+[node name="wall_sconce4" parent="lights" instance=ExtResource("3_i5ua0")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.91762, 2.43698, -16.1357)
+
+[node name="wall_sconce5" parent="lights" instance=ExtResource("3_i5ua0")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 3.77062, 2.43698, -16.1357)
+
+[node name="wall_sconce6" parent="lights" instance=ExtResource("3_i5ua0")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 8.81981, 2.43698, -16.1357)
+
+[node name="wall_sconce7" parent="lights" instance=ExtResource("3_i5ua0")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.381, 3.65845, -0.439266)
+
+[node name="wall_sconce8" parent="lights" instance=ExtResource("3_i5ua0")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.381, 3.65845, 4.7935)
+
+[node name="wall_sconce9" parent="lights" instance=ExtResource("3_i5ua0")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.381, 3.65845, 11.8405)
+
+[node name="wall_sconce10" parent="lights" instance=ExtResource("3_i5ua0")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.381, 9.44331, 9.31844)
+
+[node name="wall_sconce11" parent="lights" instance=ExtResource("3_i5ua0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.3293, 10.1501, 15.972)
+
+[node name="wall_sconce12" parent="lights" instance=ExtResource("3_i5ua0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.90087, 10.879, 15.972)
+
+[node name="wall_sconce13" parent="lights" instance=ExtResource("3_i5ua0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.24262, 10.879, 15.972)
+
+[node name="wall_sconce14" parent="lights" instance=ExtResource("3_i5ua0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.0737, 10.2522, 16.0137)
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, -9.42109, 4.90565, -13.4525)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 18.6887
+spot_angle = 56.5586
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, -2.15098, 4.90565, -13.4525)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 18.6887
+spot_angle = 47.4011
+
+[node name="SpotLight3D6" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, 3.75851, 4.90565, -13.4525)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 18.6887
+spot_angle = 44.7829
+
+[node name="SpotLight3D14" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.894966, 0.446135, 0, -0.446135, -0.894966, -3.12092, 5.98597, 8.83073)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 18.6887
+spot_angle = 49.1048
+
+[node name="SpotLight3D15" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.894966, 0.446135, 0, -0.446135, -0.894966, 2.78858, 5.98597, 8.83073)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 18.6887
+spot_angle = 40.617
+
+[node name="SpotLight3D12" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, -2.15098, -2.46947, -13.4525)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 8.44693
+spot_angle = 76.4712
+
+[node name="SpotLight3D13" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, 3.75851, -2.46947, -13.4525)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 6.38885
+spot_angle = 64.6875
+
+[node name="SpotLight3D7" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, 8.04466, 4.52887, -13.4525)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 18.6887
+spot_angle = 55.5562
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, -9.42109, 7.85739, -0.00570011)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 19.754
+spot_angle = 36.8451
+
+[node name="SpotLight3D16" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, -2.31246, 14.6053, 3.76971)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 27.331
+spot_angle = 27.818
+
+[node name="SpotLight3D17" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, -2.31246, 12.5571, 7.50144)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 18.6887
+spot_angle = 27.818
+
+[node name="SpotLight3D18" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, 9.11927, 12.5571, 8.65573)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 18.6887
+spot_angle = 34.126
+
+[node name="SpotLight3D19" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, 9.11927, 12.5571, 13.7003)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 18.6887
+spot_angle = 32.9862
+
+[node name="SpotLight3D20" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, 2.39701, 12.7289, 14.1922)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 18.6887
+spot_angle = 34.3766
+
+[node name="SpotLight3D21" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, -2.68919, 12.5571, 14.175)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 18.6887
+spot_angle = 33.791
+
+[node name="SpotLight3D23" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, 3.16208, 1.55873, 13.7003)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 18.6887
+spot_angle = 61.9409
+
+[node name="SpotLight3D25" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, 10.3246, 4.51637, 11.0267)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 18.6887
+spot_angle = 53.7007
+
+[node name="SpotLight3D26" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, 10.3246, 4.51637, 4.68254)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 18.6887
+spot_angle = 43.224
+
+[node name="SpotLight3D27" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, 10.3246, 4.51637, -0.0704913)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 18.6887
+spot_angle = 37.9117
+
+[node name="SpotLight3D28" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, 9.74538, -2.42733, 11.0267)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 18.6887
+spot_angle = 81.7245
+
+[node name="SpotLight3D29" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, 9.74538, -2.42733, 4.68254)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 18.6887
+spot_angle = 82.7887
+
+[node name="SpotLight3D30" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, 9.74538, -2.42733, -0.0704913)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 18.6887
+spot_angle = 85.6711
+
+[node name="SpotLight3D31" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, -9.6438, -1.48936, 11.0267)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 18.6887
+spot_angle = 61.18
+
+[node name="SpotLight3D32" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, -9.6438, -1.48936, 4.68254)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 18.6887
+spot_angle = 61.18
+
+[node name="SpotLight3D33" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, -9.6438, -1.48936, -0.0704913)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 18.6887
+spot_angle = 89.99
+
+[node name="SpotLight3D24" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, -2.68919, 1.55873, 13.7003)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 18.6887
+spot_angle = 45.8197
+
+[node name="SpotLight3D22" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, -8.78195, 10.256, 13.7003)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 26.6755
+spot_angle = 38.0402
+
+[node name="SpotLight3D8" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, 0.0530438, 6.80665, 0.419539)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 6.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 21.219
+spot_angle = 39.57
+
+[node name="SpotLight3D9" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, 2.66864, 6.80665, -1.96193)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 6.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 21.219
+spot_angle = 39.57
+
+[node name="SpotLight3D10" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, 0.408381, 6.80665, -4.30674)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 6.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 21.219
+spot_angle = 39.57
+
+[node name="SpotLight3D11" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, -1.8711, 6.80665, -2.10142)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 6.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 21.219
+spot_angle = 39.57
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, -0.0843909, 0.996433, 0, -0.996433, -0.0843909, -9.42109, 7.85739, 8.59344)
+light_color = Color(1, 0.690196, 0.6, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+light_volumetric_fog_energy = 2.0
+light_size = 1.0
+shadow_enabled = true
+spot_range = 22.8071
+spot_angle = 46.4815
+
+[node name="OmniLight3D" type="OmniLight3D" parent="lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.8251, -0.0779819)
+light_color = Color(1, 0.584314, 0.615686, 1)
+light_energy = 10.0
+shadow_enabled = true
+omni_range = 21.048
+omni_attenuation = 0.535887
+
+[node name="player" parent="." instance=ExtResource("2_36kpo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.05992, -13.5433)
+
+[node name="cleanup_hole" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.12381, -15.3061)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="cleanup_hole"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.304642, 0.360053, 0.00600529)
+shape = SubResource("CylinderShape3D_mpkhv")
+
+[node name="Dumpster" parent="." instance=ExtResource("7_qmdhi")]
+transform = Transform3D(0.0082978, -0.0561042, -0.998391, -0.99604, 0.0879232, -0.013219, 0.0885231, 0.994546, -0.0551524, 0, -2.12381, -15.3061)
+
+[node name="sliceable_cubes" type="Node3D" parent="."]
+
+[node name="TestCubeBig" parent="sliceable_cubes" instance=ExtResource("3_052au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.50419, 10.3236, -4.01486)
+
+[node name="TestCubeBig6" parent="sliceable_cubes" instance=ExtResource("3_052au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.35431, 10.3236, -4.01486)
+
+[node name="TestCubeBig8" parent="sliceable_cubes" instance=ExtResource("3_052au")]
+transform = Transform3D(0.398429, -0.917199, 0, 0.917199, 0.398429, 0, 0, 0, 1, 0.0841882, 16.7626, -1.35129)
+
+[node name="TestCubeBig9" parent="sliceable_cubes" instance=ExtResource("3_052au")]
+transform = Transform3D(0.398429, -0.917199, 0, 0.917199, 0.398429, 0, 0, 0, 1, 0.0841882, 16.7626, 3.83285)
+
+[node name="TestCubeBig10" parent="sliceable_cubes" instance=ExtResource("3_052au")]
+transform = Transform3D(0.398429, -0.917199, 0, 0.917199, 0.398429, 0, 0, 0, 1, 0.0841882, 16.7626, 7.86867)
+
+[node name="TestCubeBig5" parent="sliceable_cubes" instance=ExtResource("3_052au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.50419, 10.3236, 1.46158)
+
+[node name="TestCubeBig2" parent="sliceable_cubes" instance=ExtResource("3_052au")]
+transform = Transform3D(0.594865, 0.803826, 0, -0.803826, 0.594865, 0, 0, 0, 1, 2.72931, 10.2515, 6.39871)
+
+[node name="TestCubeBig11" parent="sliceable_cubes" instance=ExtResource("3_052au")]
+transform = Transform3D(0.0975768, 0.131853, 0.986455, -0.968105, 0.2424, 0.0633616, -0.230762, -0.961175, 0.1513, 2.72931, 18.1643, 2.19003)
+
+[node name="TestCube" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.20729, 7.07496, -7.49713)
+
+[node name="TestCube2" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.20729, 7.07496, -7.49713)
+
+[node name="TestCube3" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.39979, 8.34646, -7.49713)
+
+[node name="TestCube10" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.625414, 13.6226, -4.35041)
+
+[node name="TestCube15" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.37406, 5.57564, -0.292433)
+
+[node name="TestCube16" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.37406, 9.66477, 6.79951)
+
+[node name="TestCube17" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.37406, 9.66477, 15.4744)
+
+[node name="TestCube18" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.44509, 13.6648, -13.9111)
+
+[node name="TestCube19" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.33314, 21.6648, -13.9111)
+
+[node name="TestCube5" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4522, 12.8065, -5.5655)
+
+[node name="TestCube6" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.81445, 12.8065, -5.5655)
+
+[node name="TestCube13" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.81445, 17.895, -3.08932)
+
+[node name="TestCube14" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.81445, 17.895, -6.69838)
+
+[node name="TestCube7" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.81445, 12.8065, -11.9256)
+
+[node name="TestCube8" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.43976, 12.8065, 5.71909)
+
+[node name="TestCube9" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.395045, 12.8065, 11.541)
+
+[node name="TestCube12" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.01153, 16.443, 2.5822)
+
+[node name="TestCube11" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.10021, 10.14, -10.5832)
+
+[node name="TestCube4" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.764292, 7.07496, -7.49713)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/HBoxContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_menp2")
+
+[node name="Label" type="Label" parent="Control/HBoxContainer/VBoxContainer/MarginContainer/PanelContainer"]
+layout_mode = 2
+text = "Metal Shears: Styled Lid"
+label_settings = SubResource("LabelSettings_2a823")
+
+[node name="CenterpointMarker" type="Sprite2D" parent="Control"]
+scale = Vector2(0.5, 0.5)
+
+[node name="FakeMouse" type="Sprite2D" parent="Control"]
+unique_name_in_owner = true
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_djexm")
+script = ExtResource("6_k0408")
+
+[node name="SoundManager" parent="." instance=ExtResource("7_05ylg")]

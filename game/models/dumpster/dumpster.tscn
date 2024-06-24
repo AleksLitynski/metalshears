@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://ka0qs8mo83s0"]
+
+[ext_resource type="PackedScene" uid="uid://dc4cvm7yjpvpk" path="res://models/dumpster/scene.gltf" id="1_lvfpx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gbkrk"]
+size = Vector3(1.5127, 0.0419922, 2.5509)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hbiwx"]
+size = Vector3(0.991333, 0.0419922, 2.57431)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8p3p2"]
+size = Vector3(0.991333, 0.0419922, 1.62887)
+
+[node name="Dumpster" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(0.0046136, 0, 0, 0, 0.0046136, 0, 0, 0, 0.0046136, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(216.75, 0, 0, 0, 216.75, 0, 0, 0, 216.75, -86.2556, -97.7705, -63.6002)
+shape = SubResource("BoxShape3D_gbkrk")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(28.7379, 214.837, -6.13288e-08, -214.837, 28.7379, 1.52331e-06, 1.51799e-06, -1.4118e-07, 216.75, -266.123, 6.76496, -62.102)
+shape = SubResource("BoxShape3D_hbiwx")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(-30.2857, 214.624, -3.50673e-07, -214.624, -30.2857, -3.62861e-06, -3.64201e-06, -1.59778e-07, 216.75, 100.028, 6.76496, -62.102)
+shape = SubResource("BoxShape3D_hbiwx")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(0.379512, -2.6895, 216.733, -208.628, -58.7779, -0.36407, 58.7778, -208.611, -2.69164, -87.0922, 7.0608, -352.509)
+shape = SubResource("BoxShape3D_8p3p2")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(0.300294, -2.59557, 216.735, -207.824, 61.5526, 1.02509, -61.5604, -207.811, -2.4034, -87.0922, 7.0608, 231.2)
+shape = SubResource("BoxShape3D_8p3p2")
+
+[node name="Sketchfab_Scene" parent="." instance=ExtResource("1_lvfpx")]
+transform = Transform3D(0.0046136, 0, 0, 0, 0.0046136, 0, 0, 0, 0.0046136, 0, 0, 0)

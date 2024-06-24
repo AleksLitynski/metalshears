@@ -7,6 +7,9 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var blade_tilt: Node3D = $blade_tilt
 @onready var barber: BarberCharacter = $barber
 
+@onready var pickup: Area3D = $pickup
+@onready var carry_point: Node3D = %carry_point
+
 var walk_speed: float = 50
 var run_speed: float = 200
 var crouch_speed: float = 50
@@ -22,7 +25,6 @@ var last_move_vec: Vector2
 
 var jump_strength: float = 6
 var jumping_from_run: bool = false
- 
 
 enum CHARACTER_STATES {
 	CROUCH,

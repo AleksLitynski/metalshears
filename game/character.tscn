@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b0qsf2n6rekoh"]
+[gd_scene load_steps=11 format=3 uid="uid://b0qsf2n6rekoh"]
 
 [ext_resource type="Script" path="res://character.gd" id="1_p63os"]
 [ext_resource type="PackedScene" uid="uid://bck3q5vjku7qx" path="res://barber_character.tscn" id="2_serxv"]
@@ -9,6 +9,9 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xv3ti"]
 radius = 0.2
 height = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nsrht"]
+size = Vector3(1.31836, 1.3512, 1.56445)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d4fm1"]
 render_priority = 0
@@ -45,6 +48,17 @@ shape = SubResource("CapsuleShape3D_xv3ti")
 
 [node name="barber" parent="." instance=ExtResource("2_serxv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0036456, 0)
+
+[node name="carry_point" type="Node3D" parent="barber"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.852457, 0.982261)
+
+[node name="pickup" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.690135, 0.540916)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pickup"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0273438, -0.0407104, 0.274177)
+shape = SubResource("BoxShape3D_nsrht")
 
 [node name="blade_tilt" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.740638, 0.2735)

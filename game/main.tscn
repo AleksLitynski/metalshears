@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dtuxpie420j5d"]
+[gd_scene load_steps=23 format=3 uid="uid://dtuxpie420j5d"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_dyjth"]
 [ext_resource type="PackedScene" uid="uid://bwjcmdmj0qx6q" path="res://player.tscn" id="2_36kpo"]
@@ -12,6 +12,23 @@
 [ext_resource type="Texture2D" uid="uid://dghc2g2ghkh8n" path="res://images/shears.png" id="6_djexm"]
 [ext_resource type="Script" path="res://fake_mouse.gd" id="6_k0408"]
 [ext_resource type="PackedScene" uid="uid://dvshpap15hwq" path="res://sound_manager.tscn" id="7_05ylg"]
+[ext_resource type="PackedScene" uid="uid://ka0qs8mo83s0" path="res://models/dumpster/dumpster.tscn" id="7_qmdhi"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mpkhv"]
+height = 1.46478
+radius = 1.49404
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ofylp"]
+bg_color = Color(0.6, 0.0745098, 0.101961, 0.615686)
+
+[sub_resource type="LabelSettings" id="LabelSettings_buqob"]
+font = ExtResource("4_sohwu")
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_w78ra"]
+font_size = 18
+font_color = Color(1, 0.670588, 0.341176, 1)
+shadow_size = 0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_menp2"]
 bg_color = Color(0.192157, 0.141176, 0.6, 1)
@@ -20,21 +37,36 @@ border_width_top = 10
 border_width_right = 10
 border_width_bottom = 10
 border_color = Color(0.113725, 0.0862745, 0.360784, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-expand_margin_left = 20.0
-expand_margin_top = 10.0
-expand_margin_right = 20.0
-expand_margin_bottom = 10.0
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 10.0
+expand_margin_top = 5.0
+expand_margin_right = 10.0
+expand_margin_bottom = 5.0
 shadow_color = Color(0, 0, 0, 1)
 shadow_size = 10
 shadow_offset = Vector2(10, 10)
 
 [sub_resource type="LabelSettings" id="LabelSettings_2a823"]
 font = ExtResource("4_sohwu")
-font_size = 48
+font_size = 24
+font_color = Color(1, 0.670588, 0.341176, 1)
+shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_4jx8m"]
+font_size = 24
+font_color = Color(1, 0.670588, 0.341176, 1)
+shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_hon4o"]
+font_size = 18
+font_color = Color(1, 0.670588, 0.341176, 1)
+shadow_size = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_7x5xb"]
+font_size = 18
 font_color = Color(1, 0.670588, 0.341176, 1)
 shadow_size = 0
 
@@ -475,82 +507,59 @@ omni_attenuation = 0.535887
 [node name="player" parent="." instance=ExtResource("2_36kpo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.05992, -13.5433)
 
+[node name="cleanup_hole" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.12381, -15.3061)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="cleanup_hole"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.304642, 0.360053, 0.00600529)
+shape = SubResource("CylinderShape3D_mpkhv")
+
+[node name="Dumpster" parent="." instance=ExtResource("7_qmdhi")]
+transform = Transform3D(0.0082978, -0.0561042, -0.998391, -0.99604, 0.0879232, -0.013219, 0.0885231, 0.994546, -0.0551524, 0, -2.12381, -15.3061)
+
 [node name="sliceable_cubes" type="Node3D" parent="."]
 
 [node name="TestCubeBig" parent="sliceable_cubes" instance=ExtResource("3_052au")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.50419, 10.3236, -4.01486)
-
-[node name="TestCubeBig6" parent="sliceable_cubes" instance=ExtResource("3_052au")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.35431, 10.3236, -4.01486)
-
-[node name="TestCubeBig4" parent="sliceable_cubes" instance=ExtResource("3_052au")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.50419, 10.3236, -1.35129)
-
-[node name="TestCubeBig8" parent="sliceable_cubes" instance=ExtResource("3_052au")]
-transform = Transform3D(0.398429, -0.917199, 0, 0.917199, 0.398429, 0, 0, 0, 1, 0.0841882, 16.7626, -1.35129)
-
-[node name="TestCubeBig9" parent="sliceable_cubes" instance=ExtResource("3_052au")]
-transform = Transform3D(0.398429, -0.917199, 0, 0.917199, 0.398429, 0, 0, 0, 1, 0.0841882, 16.7626, 3.83285)
-
-[node name="TestCubeBig10" parent="sliceable_cubes" instance=ExtResource("3_052au")]
-transform = Transform3D(0.398429, -0.917199, 0, 0.917199, 0.398429, 0, 0, 0, 1, 0.0841882, 16.7626, 7.86867)
-
-[node name="TestCubeBig7" parent="sliceable_cubes" instance=ExtResource("3_052au")]
-transform = Transform3D(0.986566, 0.15814, -0.0409684, -0.16336, 0.955038, -0.247417, 0, 0.250786, 0.968043, -6.55312, 10.3236, -1.35129)
-
-[node name="TestCubeBig5" parent="sliceable_cubes" instance=ExtResource("3_052au")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.50419, 10.3236, 1.46158)
+transform = Transform3D(0.121159, 0.992633, 0, -0.992633, 0.121159, 0, 0, 0, 1, 1.83331, 15.8734, 8.43925)
 
 [node name="TestCubeBig2" parent="sliceable_cubes" instance=ExtResource("3_052au")]
-transform = Transform3D(0.594865, 0.803826, 0, -0.803826, 0.594865, 0, 0, 0, 1, 2.72931, 10.2515, 6.39871)
-
-[node name="TestCubeBig11" parent="sliceable_cubes" instance=ExtResource("3_052au")]
-transform = Transform3D(0.0975768, 0.131853, 0.986455, -0.968105, 0.2424, 0.0633616, -0.230762, -0.961175, 0.1513, 2.72931, 18.1643, 2.19003)
+transform = Transform3D(0.024478, 0.185972, 0.98225, -0.998673, 0.04908, 0.0155948, -0.0453087, -0.981328, 0.186927, -1.79276, 11.4917, 1.69868)
 
 [node name="TestCubeBig3" parent="sliceable_cubes" instance=ExtResource("3_052au")]
-transform = Transform3D(0.34728, 0.46927, 0.8119, -0.803826, 0.594865, 0, -0.482971, -0.652626, 0.583796, 2.16351, 10.7515, 0.499461)
+transform = Transform3D(-0.0413306, -0.944521, 0.325839, -0.998673, 0.04908, 0.0155948, -0.0307218, -0.324762, -0.945297, 3.14813, 9.81665, 5.31852)
 
 [node name="TestCube" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.20729, 7.07496, -7.49713)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.048, 10.6174, -2.49451)
 
 [node name="TestCube2" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.20729, 7.07496, -7.49713)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.61623, 4.51705, -12.7759)
 
 [node name="TestCube3" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.39979, 8.34646, -7.49713)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.695218, 4.51705, -7.45028)
 
 [node name="TestCube5" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4522, 12.8065, -5.5655)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.39982, 2.18294, 5.39821)
 
 [node name="TestCube6" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.81445, 12.8065, -5.5655)
-
-[node name="TestCube13" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.81445, 17.895, -3.08932)
-
-[node name="TestCube14" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.81445, 17.895, -6.69838)
-
-[node name="TestCube7" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.81445, 12.8065, -11.9256)
+transform = Transform3D(1, 0, 0, 0, 0.94346, -0.331486, 0, 0.331486, 0.94346, 9.39982, 3.1672, 6.88759)
 
 [node name="TestCube8" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.43976, 12.8065, 5.71909)
+transform = Transform3D(1, 0, 0, 0, 0.94346, -0.331486, 0, 0.331486, 0.94346, 10.3344, 10.6483, 6.88759)
 
 [node name="TestCube9" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.395045, 12.8065, 11.541)
+transform = Transform3D(1, 0, 0, 0, 0.257487, -0.966282, 0, 0.966282, 0.257487, -10.6905, 10.6483, 14.6308)
 
 [node name="TestCube10" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.53971, 14.5945, -10.5832)
-
-[node name="TestCube12" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.01153, 16.443, 2.5822)
+transform = Transform3D(1, 0, 0, 0, 0.257487, -0.966282, 0, 0.966282, 0.257487, -9.54405, 10.6483, -0.465038)
 
 [node name="TestCube11" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.10021, 10.14, -10.5832)
+transform = Transform3D(1, 0, 0, 0, 0.257487, -0.966282, 0, 0.966282, 0.257487, -4.16246, 1.86527, 1.72851)
+
+[node name="TestCube7" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
+transform = Transform3D(0.905114, 0.00234714, -0.425163, -0.00160736, 0.999996, 0.00209871, 0.425166, -0.00121619, 0.905115, 9.39982, 2.18294, 8.47288)
 
 [node name="TestCube4" parent="sliceable_cubes" instance=ExtResource("3_jkn8q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.764292, 7.07496, -7.49713)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.699527, -1.72434, -11.7118)
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -560,33 +569,169 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+[node name="too_heavy" type="PanelContainer" parent="Control"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_ofylp")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control/HBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="Control/too_heavy"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/HBoxContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Control/too_heavy/CenterContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 30
+text = "TOO HEAVY"
+label_settings = SubResource("LabelSettings_buqob")
+
+[node name="pause_help" type="Label" parent="Control"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -108.0
+offset_bottom = 26.0
+grow_horizontal = 0
+text = "Esc to Pause"
+label_settings = SubResource("LabelSettings_w78ra")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ui_panel" type="HBoxContainer" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/ui_panel"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/ui_panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/ui_panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="PanelContainer" type="PanelContainer" parent="Control/HBoxContainer/VBoxContainer/MarginContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Control/ui_panel/VBoxContainer/HBoxContainer/MarginContainer2"]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_menp2")
 
-[node name="Label" type="Label" parent="Control/HBoxContainer/VBoxContainer/MarginContainer/PanelContainer"]
+[node name="time_label" type="Label" parent="Control/ui_panel/VBoxContainer/HBoxContainer/MarginContainer2/PanelContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-text = "Metal Shears: Styled Lid"
+text = "120 SECONDS REMAINING"
 label_settings = SubResource("LabelSettings_2a823")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/ui_panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/ui_panel/VBoxContainer/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_menp2")
+
+[node name="mass_label" type="Label" parent="Control/ui_panel/VBoxContainer/HBoxContainer/MarginContainer/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0 / 80 MASS ERASED"
+label_settings = SubResource("LabelSettings_2a823")
+
+[node name="pause_panel" type="CenterContainer" parent="Control"]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/pause_panel"]
+layout_mode = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="Control/pause_panel/VBoxContainer"]
+custom_minimum_size = Vector2(900, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_menp2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/pause_panel/VBoxContainer/PanelContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="big_message" type="Label" parent="Control/pause_panel/VBoxContainer/PanelContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "> Oh thank god you're here. I'm CHAZ. My Barber shop is full of
+  purple cubes again.
+> Please, help me get all the cubes in the dumpster downtairs
+  before time runs out.
+> I'm not that strong, so cut up the cubes nice and small before you 
+try to pick them up"
+label_settings = SubResource("LabelSettings_2a823")
+
+[node name="big_message2" type="Label" parent="Control/pause_panel/VBoxContainer/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Controls:"
+label_settings = SubResource("LabelSettings_4jx8m")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/pause_panel/VBoxContainer/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="big_message5" type="Label" parent="Control/pause_panel/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+text = "WASD - Move
+Mose - Look
+Tap Shift - Roll
+Hold Shift - Run
+C - Crouch
+Space - Jump
+"
+label_settings = SubResource("LabelSettings_hon4o")
+
+[node name="big_message4" type="Label" parent="Control/pause_panel/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+text = "F - Pick up blocks
+When holding a block:
+    F - Drop
+    Left Mouse - Throw"
+label_settings = SubResource("LabelSettings_w78ra")
+
+[node name="big_message3" type="Label" parent="Control/pause_panel/VBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+text = "Right Mouse - Enter Blade Mode
+In blade mode:
+    Left Mouse - Cut
+    WASD - Change Camera Angle
+    Right Mouse - Exit Blade Mode"
+label_settings = SubResource("LabelSettings_7x5xb")
+
+[node name="ok_great" type="Button" parent="Control/pause_panel/VBoxContainer/PanelContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Ok Great"
 
 [node name="CenterpointMarker" type="Sprite2D" parent="Control"]
 scale = Vector2(0.5, 0.5)

@@ -16,6 +16,9 @@ var moving_camera_target_height: float = 0.45
 var zoomed_camera_target_height: float = 0.45
 var camera_target_height: float = moving_camera_target_height # distance above players head the camera should look (can be negative)
 
+var carrying: bool = false
+var carried: Node3D
+
 
 # camera speed
 var camera_move_speed: float = INF
@@ -84,7 +87,12 @@ func _process(delta):
 	if character.is_frozen():
 		# zero out movement
 		character.set_dir(Vector2(0, -1).rotated(-camera.global_rotation.y))
-		
+	
+	if carrying:
+		var mesh: MeshInstance3D = carried.get_node("mesh")
+		var global_center = mesh.to_global(mesh.get_aabb().get_center()) 
+		var current_offset = carried.global_position - global_center
+		carried.global_position = character.carry_point.global_position + current_offset
 	
 
 func update_camera(delta):
@@ -121,6 +129,8 @@ func _input(event: InputEvent):
 	# lock/unlock the camera
 	if (event.is_action("ui_cancel")) || (Input.mouse_mode == Input.MOUSE_MODE_VISIBLE && event is InputEventMouseMotion):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		if event.is_action("ui_cancel"):
+			main.pause()
 	else:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
@@ -157,6 +167,14 @@ func apply_camera_vertical(y_delta: float, min: float, max: float):
 		camera_offset.x += scaled_y * 0.4
 	
 	camera_angle = fmod(camera_angle, TAU)
+
+func reset_move_vec():
+	move_vec = Vector2.ZERO
+	if Input.is_action_pressed("move_forward"): move_vec.y -= 1
+	if Input.is_action_pressed("move_back"): move_vec.y += 1
+	if Input.is_action_pressed("move_left"): move_vec.x -= 1
+	if Input.is_action_pressed("move_right"): move_vec.x += 1
+	character.set_dir(move_vec.normalized().rotated(-camera.global_rotation.y))
 
 var move_vec: Vector2 = Vector2(0, 0)
 func handle_move_event(event: InputEvent):
@@ -204,18 +222,59 @@ func handle_action_event(event: InputEvent):
 		if character.is_frozen():
 			main.sound_manager.play_sfx(SoundManager.SFX.CLEAN_CUT)
 			character.do_slice()
+		if carrying:
+			throw_carried()
 	if event.is_action_pressed("right_hand_secondary"):
-		enter_cut_mode()
+		if !carrying:
+			enter_cut_mode()
 	if event.is_action_released("right_hand_secondary"):
-		exit_cut_mode()
+		if character.is_frozen():
+			exit_cut_mode()
 	if event.is_action("left_hand_primary"):
 		print("left_hand_primary")
 	if event.is_action("left_hand_secondary"):
 		print("left_hand_secondary")
-	if event.is_action("interact"):
-		print("interact")
+	if event.is_action_pressed("interact"):
+		if !character.is_frozen():
+			try_pickup()
 	if event.is_action("use_item"):
 		print("use_item")
+
+func try_pickup():
+	if carrying:
+		drop()
+		return
+	var some_liftable: bool = false
+	var some_in_group: bool = false
+	for b in character.pickup.get_overlapping_bodies():
+		if b.is_in_group("sliceable"):
+			some_in_group = true
+			var vol = b.get_node("mesh").mesh.get_aabb().get_volume()
+			if vol < 1.0:
+				some_liftable = true
+				carrying = true
+				carried = b
+				carried.freeze = true
+				carried.get_node("shape").disabled = true
+				break
+	if !some_liftable and some_in_group:
+		main.flash_too_heavy()
+				
+func drop():
+	carrying = false
+	carried.freeze = false
+	carried.get_node("shape").disabled = false
+	var was_carried = carried
+	carried = null
+	return was_carried
+
+func throw_carried():
+	var was_carried: RigidBody3D = drop()
+	var xz = -Vector2(0, -1).rotated(-character.rotation.y)
+	var dir  = Vector3(xz.x, 0.3, xz.y)
+	#was_carried.global_position - character.global_position
+	was_carried.apply_central_impulse(dir * 8 * was_carried.mass)
+				
 
 @onready var snap_timer: Timer = $Timer
 func snap_time(duration: float, todo: Callable):
