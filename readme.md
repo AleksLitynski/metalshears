@@ -19,8 +19,8 @@ I already added a few common file types to .gitattributes, feel free to add more
 
 ## Generating animations
 
-combine animations: https://nilooy.github.io/character-animation-combiner/
-tutorial: https://www.youtube.com/watch?v=dhuedr-jp_A
-mixamo: https://www.mixamo.com/#/?limit=96&page=1&query=fast+run&type=Motion%2CMotionPack
+* combine animations: https://nilooy.github.io/character-animation-combiner/
+* tutorial: https://www.youtube.com/watch?v=dhuedr-jp_A
+* mixamo: https://www.mixamo.com/#/?limit=96&page=1&query=fast+run&type=Motion%2CMotionPack
 
 
