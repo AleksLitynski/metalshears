@@ -24,3 +24,12 @@ I already added a few common file types to .gitattributes, feel free to add more
 * mixamo: https://www.mixamo.com/#/?limit=96&page=1&query=fast+run&type=Motion%2CMotionPack
 
 
+## Third party assets
+
+License obviously doesn't apply to third party assets.
+
+* Animations and character model from https://www.mixamo.com
+* Audio from https://pixabay.com
+* Mesh slicing addon https://github.com/PiCode9560/Godot-4-Concave-Mesh-Slicer
+* Non-character models from https://sketchfab.com
+* Fonts from https://www.dafont.com
